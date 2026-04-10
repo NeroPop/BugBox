@@ -1207,7 +1207,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 1
   m_VoxelSize: 0.05
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: f30c48e0844e76e4eb2b18ff2de62fb8, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 98c49d6b7baba424596b02949c25b283, type: 2}
   m_BuildHeightMesh: 1
 --- !u!1 &1664473225
 GameObject:
@@ -1462,7 +1462,7 @@ GameObject:
   - component: {fileID: 1719995939}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

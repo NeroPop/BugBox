@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 33953887}
   - component: {fileID: 33953886}
   - component: {fileID: 33953884}
+  - component: {fileID: 33953890}
   m_Layer: 0
   m_Name: Agent (5)
   m_TagString: Untagged
@@ -160,7 +161,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33953883}
   m_Enabled: 1
-  m_AgentTypeID: 1
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 5
   m_Acceleration: 8
@@ -240,12 +241,39 @@ Transform:
   m_GameObject: {fileID: 33953883}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.09, y: 0.24, z: 3.97}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -10.09, y: 0, z: 3.9700003}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1634654719}
+  m_Father: {fileID: 1474282399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &33953890
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33953883}
+  serializedVersion: 5
+  m_Mass: 0.2
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &35163881
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,6 +287,7 @@ GameObject:
   - component: {fileID: 35163885}
   - component: {fileID: 35163884}
   - component: {fileID: 35163882}
+  - component: {fileID: 35163888}
   m_Layer: 0
   m_Name: Agent (1)
   m_TagString: Untagged
@@ -287,7 +316,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35163881}
   m_Enabled: 1
-  m_AgentTypeID: 1
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 5
   m_Acceleration: 8
@@ -367,12 +396,39 @@ Transform:
   m_GameObject: {fileID: 35163881}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.72, y: 0.24, z: -3.62}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 9.72, y: 0, z: -3.62}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1634654719}
+  m_Father: {fileID: 1474282399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &35163888
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35163881}
+  serializedVersion: 5
+  m_Mass: 0.2
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &162129343
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,6 +665,7 @@ GameObject:
   - component: {fileID: 254691820}
   - component: {fileID: 254691819}
   - component: {fileID: 254691817}
+  - component: {fileID: 254691823}
   m_Layer: 0
   m_Name: Agent (2)
   m_TagString: Untagged
@@ -637,7 +694,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254691816}
   m_Enabled: 1
-  m_AgentTypeID: 1
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 5
   m_Acceleration: 8
@@ -717,12 +774,39 @@ Transform:
   m_GameObject: {fileID: 254691816}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.7, y: 0.24, z: 7.92}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 7.7, y: 0, z: 7.92}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1634654719}
+  m_Father: {fileID: 1474282399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &254691823
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254691816}
+  serializedVersion: 5
+  m_Mass: 0.2
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &606253807
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,6 +932,7 @@ GameObject:
   - component: {fileID: 671862450}
   - component: {fileID: 671862449}
   - component: {fileID: 671862447}
+  - component: {fileID: 671862453}
   m_Layer: 0
   m_Name: Agent (4)
   m_TagString: Untagged
@@ -876,7 +961,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 671862446}
   m_Enabled: 1
-  m_AgentTypeID: 1
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 5
   m_Acceleration: 8
@@ -956,12 +1041,39 @@ Transform:
   m_GameObject: {fileID: 671862446}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.54, y: 0.24, z: 10.95}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.54, y: 0, z: 10.95}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1634654719}
+  m_Father: {fileID: 1474282399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &671862453
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671862446}
+  serializedVersion: 5
+  m_Mass: 0.2
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &811834622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4287675444901438133, guid: 6f6aa82a5a5850c40b9f62fc027f846c, type: 3}
   keyCode: 32
-  spawnedPrefabsHolder: {fileID: 0}
+  spawnedPrefabsHolder: {fileID: 1645357702}
 --- !u!4 &923320292
 Transform:
   m_ObjectHideFlags: 0
@@ -1171,6 +1283,7 @@ GameObject:
   - component: {fileID: 1143978485}
   - component: {fileID: 1143978484}
   - component: {fileID: 1143978482}
+  - component: {fileID: 1143978488}
   m_Layer: 0
   m_Name: Agent (3)
   m_TagString: Untagged
@@ -1199,7 +1312,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143978481}
   m_Enabled: 1
-  m_AgentTypeID: 1
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 5
   m_Acceleration: 8
@@ -1279,12 +1392,39 @@ Transform:
   m_GameObject: {fileID: 1143978481}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.69, y: 0.24, z: -9.42}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -8.69, y: 0, z: -9.420001}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1634654719}
+  m_Father: {fileID: 1474282399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1143978488
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143978481}
+  serializedVersion: 5
+  m_Mass: 0.2
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1474282398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,10 +1450,16 @@ Transform:
   m_GameObject: {fileID: 1474282398}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.78934, y: 5, z: 9.86918}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 33953889}
+  - {fileID: 671862452}
+  - {fileID: 1143978487}
+  - {fileID: 254691822}
+  - {fileID: 35163887}
+  - {fileID: 1634654719}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1544663783
@@ -1723,6 +1869,7 @@ GameObject:
   - component: {fileID: 1634654716}
   - component: {fileID: 1634654715}
   - component: {fileID: 1634654717}
+  - component: {fileID: 1634654720}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -1738,7 +1885,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1634654713}
   m_Enabled: 1
-  m_AgentTypeID: 1
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
@@ -1830,18 +1977,40 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1634654713}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 33953889}
-  - {fileID: 671862452}
-  - {fileID: 1143978487}
-  - {fileID: 254691822}
-  - {fileID: 35163887}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 1474282399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1634654720
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634654713}
+  serializedVersion: 5
+  m_Mass: 0.2
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1645357701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,7 +2070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
-  m_AgentTypeID: 1
+  m_AgentTypeID: -1372625422
   m_CollectObjects: 2
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
@@ -1910,7 +2079,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -2254,7 +2423,6 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1634654719}
   - {fileID: 1474282399}
   - {fileID: 1557957669}
   - {fileID: 1664473227}

@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e30b8537a8307147863b27c8c7bf056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropItem
-  prefab: {fileID: 4089331123077308433, guid: 0487afb965de7004085ce2a43e0aea29, type: 3}
+  prefab: {fileID: 6631744311169712849, guid: 0487afb965de7004085ce2a43e0aea29, type: 3}
   spawnedPrefabsHolder: {fileID: 1645357702}
   spawnCamera: {fileID: 1719995941}
   spawnLayerMask:
@@ -1140,15 +1140,15 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_UseGeometry: 0
+  m_UseGeometry: 1
   m_DefaultArea: 0
   m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
   m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_OverrideVoxelSize: 1
+  m_VoxelSize: 0.05
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: f30c48e0844e76e4eb2b18ff2de62fb8, type: 2}
   m_BuildHeightMesh: 1

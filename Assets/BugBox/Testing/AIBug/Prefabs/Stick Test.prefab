@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6347059500917900712}
   - component: {fileID: 6114557110376364879}
-  - component: {fileID: 5490358671989510197}
   - component: {fileID: 8292380145887831776}
+  - component: {fileID: 5057482465924315977}
   m_Layer: 0
   m_Name: Stick Test
   m_TagString: Untagged
@@ -62,18 +62,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5490358671989510197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6631744311169712849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac596217843ab3647b721eacaea9c581, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.AI.Navigation.Samples::Unity.AI.Navigation.Samples.DynamicNavMeshObject
 --- !u!114 &8292380145887831776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +82,18 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &5057482465924315977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6631744311169712849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be0d56fcb0935a44ba9d65b36f1a67df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavMeshUpdate
 --- !u!1 &8208200405347114401
 GameObject:
   m_ObjectHideFlags: 0

@@ -520,7 +520,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   PositionOffset: {x: 0, y: 10, z: 0}
-  RotationOffset: {x: 0, y: 0, z: -0.08715574, w: 0.9961947}
+  RotationOffsetPositive: {x: 0, y: 0, z: 0.08637331, w: 0.99626285}
+  RotationOffsetNegative: {x: 0, y: 0, z: 0.08715588, w: -0.99619466}
 --- !u!1 &1072941775
 GameObject:
   m_ObjectHideFlags: 0

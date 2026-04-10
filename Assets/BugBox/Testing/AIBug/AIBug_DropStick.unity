@@ -502,12 +502,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e30b8537a8307147863b27c8c7bf056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropItem
-  prefab: {fileID: 4287675444901438133, guid: 6f6aa82a5a5850c40b9f62fc027f846c, type: 3}
+  prefab: {fileID: 4089331123077308433, guid: 0487afb965de7004085ce2a43e0aea29, type: 3}
   spawnedPrefabsHolder: {fileID: 1645357702}
   spawnCamera: {fileID: 1719995941}
   spawnLayerMask:
     serializedVersion: 2
     m_Bits: 1
+  PositionOffset: {x: 0, y: 13, z: 0}
+  RotationOffset: {x: 0, y: 0, z: 0.043619387, w: 0.99904823}
 --- !u!1 &1072941775
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,7 +590,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9452ae1262a74094f8a68013fbcd1834, type: 2}
+  - {fileID: 2100000, guid: 3cc1815f9c5a74146ab25f4bad1fb4b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1652,5 +1654,5 @@ SceneRoots:
   - {fileID: 1719995942}
   - {fileID: 1474282399}
   - {fileID: 1664473227}
-  - {fileID: 1645357702}
   - {fileID: 923320292}
+  - {fileID: 1645357702}

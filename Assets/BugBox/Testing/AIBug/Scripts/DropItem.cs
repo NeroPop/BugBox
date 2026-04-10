@@ -15,8 +15,13 @@ public class DropItem : MonoBehaviour
     [SerializeField]
     LayerMask spawnLayerMask = Physics.DefaultRaycastLayers;
 
+    [Header("Spawn Settings")]
+
     [SerializeField]
-    Vector3 SpawnOffset = new Vector3(0, 5, 0);
+    Vector3 PositionOffset = new Vector3(0, 5, 0);
+
+    [SerializeField]
+    Quaternion RotationOffset = Quaternion.identity;
 
     Transform m_Transform;
     InputAction m_ClickAction;
@@ -51,6 +56,6 @@ public class DropItem : MonoBehaviour
         Ray ray = spawnCamera.ScreenPointToRay(mousePos);
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, spawnLayerMask))
-            Instantiate(prefab, (hit.point +SpawnOffset), Quaternion.identity, spawnedPrefabsHolder);
+            Instantiate(prefab, (hit.point + PositionOffset), (RotationOffset), spawnedPrefabsHolder);
     }
 }

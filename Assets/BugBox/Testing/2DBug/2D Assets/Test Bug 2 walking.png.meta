@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: 65656b762c0c20944ad9f18e63449a62
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5874394830479573534
+    second: Test Bug 2 walking_0
+  - first:
+      213: 5312906614624643114
+    second: Test Bug 2 walking_1
+  - first:
+      213: -971320621407340703
+    second: Test Bug 2 walking_2
+  - first:
+      213: 6296632296813054249
+    second: Test Bug 2 walking_3
+  - first:
+      213: 2025146763493586318
+    second: Test Bug 2 walking_4
+  - first:
+      213: 771502150377713250
+    second: Test Bug 2 walking_5
+  - first:
+      213: 649531150533729227
+    second: Test Bug 2 walking_6
+  - first:
+      213: 6846209544143562403
+    second: Test Bug 2 walking_7
+  - first:
+      213: -6238771098359787613
+    second: Test Bug 2 walking_8
+  - first:
+      213: -7914218343798057872
+    second: Test Bug 2 walking_9
+  - first:
+      213: -1271160354383589970
+    second: Test Bug 2 walking_10
+  - first:
+      213: -5836742966335916033
+    second: Test Bug 2 walking_11
+  - first:
+      213: 7975315190670950433
+    second: Test Bug 2 walking_12
+  - first:
+      213: 5247023036241838674
+    second: Test Bug 2 walking_13
+  - first:
+      213: -8343087595158436072
+    second: Test Bug 2 walking_14
+  - first:
+      213: 3840481231229052191
+    second: Test Bug 2 walking_15
+  - first:
+      213: 3305343992365745187
+    second: Test Bug 2 walking_16
+  - first:
+      213: -3437655248587827408
+    second: Test Bug 2 walking_17
+  - first:
+      213: 3070213455507299451
+    second: Test Bug 2 walking_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Test Bug 2 walking_0
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 6951
+        width: 1782
+        height: 764
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e12402579fa068150800000000000000
+      internalID: 5874394830479573534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_1
+      rect:
+        serializedVersion: 2
+        x: 2255
+        y: 6952
+        width: 1782
+        height: 764
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a286681ca6c3bb940800000000000000
+      internalID: 5312906614624643114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_2
+      rect:
+        serializedVersion: 2
+        x: 4271
+        y: 6896
+        width: 1781
+        height: 761
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 167f0068a0d2582f0800000000000000
+      internalID: -971320621407340703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_3
+      rect:
+        serializedVersion: 2
+        x: 6224
+        y: 6900
+        width: 1782
+        height: 757
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9294bc486b1226750800000000000000
+      internalID: 6296632296813054249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_4
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 5405
+        width: 1781
+        height: 753
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8531107044ca1c10800000000000000
+      internalID: 2025146763493586318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_5
+      rect:
+        serializedVersion: 2
+        x: 2307
+        y: 5355
+        width: 1782
+        height: 750
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26ea6b04e1de4ba00800000000000000
+      internalID: 771502150377713250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_6
+      rect:
+        serializedVersion: 2
+        x: 4323
+        y: 5359
+        width: 1780
+        height: 746
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcb1d1ad329930900800000000000000
+      internalID: 649531150533729227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_7
+      rect:
+        serializedVersion: 2
+        x: 6277
+        y: 5351
+        width: 1781
+        height: 754
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a6e090ce4f920f50800000000000000
+      internalID: 6846209544143562403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_8
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 3656
+        width: 1781
+        height: 763
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3af8a4f8dbe6b69a0800000000000000
+      internalID: -6238771098359787613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_9
+      rect:
+        serializedVersion: 2
+        x: 2359
+        y: 3588
+        width: 1781
+        height: 773
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 074590ff85c0b2290800000000000000
+      internalID: -7914218343798057872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_10
+      rect:
+        serializedVersion: 2
+        x: 4374
+        y: 3640
+        width: 1782
+        height: 779
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ead0860846eeb5ee0800000000000000
+      internalID: -1271160354383589970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_11
+      rect:
+        serializedVersion: 2
+        x: 6328
+        y: 3574
+        width: 1782
+        height: 787
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff7b94e4239bffea0800000000000000
+      internalID: -5836742966335916033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_12
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 1774
+        width: 1781
+        height: 792
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12008bf29e20eae60800000000000000
+      internalID: 7975315190670950433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_13
+      rect:
+        serializedVersion: 2
+        x: 2308
+        y: 1694
+        width: 1781
+        height: 799
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2528c7bc6ab21d840800000000000000
+      internalID: 5247023036241838674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_14
+      rect:
+        serializedVersion: 2
+        x: 4375
+        y: 1688
+        width: 1781
+        height: 805
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8170d982906673c80800000000000000
+      internalID: -8343087595158436072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_15
+      rect:
+        serializedVersion: 2
+        x: 6328
+        y: 1690
+        width: 1782
+        height: 803
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1566f105512c4530800000000000000
+      internalID: 3840481231229052191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_16
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 241
+        width: 1781
+        height: 799
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3248e6d39d0fedd20800000000000000
+      internalID: 3305343992365745187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_17
+      rect:
+        serializedVersion: 2
+        x: 2307
+        y: 242
+        width: 1782
+        height: 797
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0375aafc3cefa40d0800000000000000
+      internalID: -3437655248587827408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test Bug 2 walking_18
+      rect:
+        serializedVersion: 2
+        x: 4375
+        y: 241
+        width: 1781
+        height: 796
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7c13200fd69b9a20800000000000000
+      internalID: 3070213455507299451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Test Bug 2 walking_0: 5874394830479573534
+      Test Bug 2 walking_1: 5312906614624643114
+      Test Bug 2 walking_10: -1271160354383589970
+      Test Bug 2 walking_11: -5836742966335916033
+      Test Bug 2 walking_12: 7975315190670950433
+      Test Bug 2 walking_13: 5247023036241838674
+      Test Bug 2 walking_14: -8343087595158436072
+      Test Bug 2 walking_15: 3840481231229052191
+      Test Bug 2 walking_16: 3305343992365745187
+      Test Bug 2 walking_17: -3437655248587827408
+      Test Bug 2 walking_18: 3070213455507299451
+      Test Bug 2 walking_2: -971320621407340703
+      Test Bug 2 walking_3: 6296632296813054249
+      Test Bug 2 walking_4: 2025146763493586318
+      Test Bug 2 walking_5: 771502150377713250
+      Test Bug 2 walking_6: 649531150533729227
+      Test Bug 2 walking_7: 6846209544143562403
+      Test Bug 2 walking_8: -6238771098359787613
+      Test Bug 2 walking_9: -7914218343798057872
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

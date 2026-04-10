@@ -21,10 +21,13 @@ public class DropItem : MonoBehaviour
     Vector3 PositionOffset = new Vector3(0, 5, 0);
 
     [SerializeField]
-    Quaternion RotationOffset = Quaternion.identity;
+    Quaternion RotationOffsetPositive = Quaternion.identity;
+    [SerializeField]
+    Quaternion RotationOffsetNegative = Quaternion.identity;
 
     Transform m_Transform;
     InputAction m_ClickAction;
+    private Quaternion _RotationOffset;
 
     void Awake()
     {
@@ -56,6 +59,17 @@ public class DropItem : MonoBehaviour
         Ray ray = spawnCamera.ScreenPointToRay(mousePos);
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, spawnLayerMask))
-            Instantiate(prefab, (hit.point + PositionOffset), (RotationOffset), spawnedPrefabsHolder);
+        {
+            if (hit.point.x < gameObject.transform.position.x)
+            {
+                _RotationOffset = RotationOffsetNegative;
+            }
+            else
+            {
+                _RotationOffset = RotationOffsetPositive;
+            }
+
+            Instantiate(prefab, (hit.point + PositionOffset), (_RotationOffset), spawnedPrefabsHolder);
+        }
     }
 }

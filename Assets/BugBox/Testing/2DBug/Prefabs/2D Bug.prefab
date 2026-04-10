@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 2407784619304604077}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.19999999, y: 0.5, z: 0.19999999}
+  m_LocalScale: {x: 0.19999999, y: 0.5, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1721677656238776263}
@@ -260,7 +260,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5fd30bc8b8936448e46d8644298a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestBugAI
+  BugAnimator: {fileID: 1512024125075058663}
   m_Range: 25
+  m_MinIdleTime: 1
+  m_MaxIdleTime: 5
+  m_IdleChance: 0.3
 --- !u!54 &6323641708159848294
 Rigidbody:
   m_ObjectHideFlags: 0

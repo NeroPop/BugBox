@@ -6,19 +6,32 @@ public class TestBugAI : MonoBehaviour
     [Header("References")]
     [SerializeField] Animator BugAnimator;
 
-    [Header("Preferences")]
+    [Header("Wandering")]
     [SerializeField] float m_Range = 25.0f;
     [SerializeField] float m_MinIdleTime = 1f;
     [SerializeField] float m_MaxIdleTime = 5f;
-    [SerializeField] float m_IdleChance = 0.3f;   // 0-1 probability of stopping at each destination
+    [SerializeField] float m_IdleChance = 0.3f;
+
+    [Header("Avoidance")]
+    [SerializeField] float m_StuckTimeout = 2f;       // seconds before assuming stuck
+    [SerializeField] float m_StuckThreshold = 0.05f;  // minimum movement to not be considered stuck
 
     NavMeshAgent m_Agent;
     float m_IdleTimer;
     bool m_Idling;
 
+    Vector3 m_LastPosition;
+    float m_StuckTimer;
+
     void Start()
     {
         m_Agent = GetComponent<NavMeshAgent>();
+
+        // Built-in avoidance quality - Higher is better but more expensive
+        m_Agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+
+        m_LastPosition = transform.position;
+        SetDestination();
         StartWalking();
     }
 
@@ -38,6 +51,10 @@ public class TestBugAI : MonoBehaviour
             }
             return;
         }
+        else
+        {
+            CheckIfStuck();
+        }
 
         if (m_Agent.remainingDistance > 0.1f)
             return;
@@ -52,6 +69,28 @@ public class TestBugAI : MonoBehaviour
         {
             SetDestination();
         }
+    }
+
+    void CheckIfStuck()
+    {
+        float movedDistance = Vector3.Distance(transform.position, m_LastPosition);
+
+        if (movedDistance < m_StuckThreshold)
+        {
+            m_StuckTimer += Time.deltaTime;
+
+            if (m_StuckTimer >= m_StuckTimeout)
+            {
+                m_StuckTimer = 0f;
+                SetDestination();
+            }
+        }
+        else
+        {
+            m_StuckTimer = 0f;
+        }
+
+        m_LastPosition = transform.position;
     }
 
     void SetDestination()

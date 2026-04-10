@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.034, y: -0.402}
+  m_AnchoredPosition: {x: -0.092, y: -0.402}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &7881981084742977969
@@ -235,7 +235,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8380385329934698139}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 0.2
+  m_Radius: 0.4
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -261,10 +261,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestBugAI
   BugAnimator: {fileID: 1512024125075058663}
-  m_Range: 25
-  m_MinIdleTime: 1
-  m_MaxIdleTime: 5
+  m_Range: 30
+  m_MinIdleTime: 2
+  m_MaxIdleTime: 10
   m_IdleChance: 0.3
+  m_StuckTimeout: 2
+  m_StuckThreshold: 0.1
 --- !u!54 &6323641708159848294
 Rigidbody:
   m_ObjectHideFlags: 0

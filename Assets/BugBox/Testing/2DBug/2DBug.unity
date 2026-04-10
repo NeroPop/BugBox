@@ -210,7 +210,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 10, y: 8, z: 0}
-  m_LocalScale: {x: 20, y: 18, z: 0.5}
+  m_LocalScale: {x: 19.5, y: 18, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 811834623}
@@ -824,7 +824,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -10, y: 8, z: 0}
-  m_LocalScale: {x: 20, y: 18, z: 0.5}
+  m_LocalScale: {x: 19.5, y: 18, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 811834623}
@@ -936,7 +936,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 8, z: 10}
-  m_LocalScale: {x: 20, y: 18, z: 0.5}
+  m_LocalScale: {x: 19.5, y: 18, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 811834623}
@@ -1253,7 +1253,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 8, z: -10}
-  m_LocalScale: {x: 20, y: 18, z: 0.5}
+  m_LocalScale: {x: 19.5, y: 18, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 811834623}
@@ -1438,7 +1438,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 9
+  near clip plane: 8
   far clip plane: 200
   field of view: 65.9
   orthographic: 1

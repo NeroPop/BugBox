@@ -56,9 +56,11 @@ public class TestBugAI : MonoBehaviour
 
     void SetDestination()
     {
-        Vector3 randomPoint = Random.insideUnitSphere * m_Range;
-        randomPoint.y = 0f;
-        m_Agent.destination = randomPoint;
+        Vector3 randomPoint = transform.position + Random.insideUnitSphere * m_Range;
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomPoint, out hit, m_Range, NavMesh.AllAreas))
+            m_Agent.destination = hit.position;
     }
 
     private void StartIdle()

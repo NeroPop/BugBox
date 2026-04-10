@@ -108,19 +108,19 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.1
   contrast:
     m_OverrideState: 1
     m_Value: 30.2
   colorFilter:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: 65.1
+    m_Value: 47
 --- !u!114 &-4676726222695427692
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -243,13 +243,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.98001087, z: 0.86150366, w: -0.08237226}
+    m_Value: {x: 1, y: 0.98001087, z: 0.86150366, w: -0.19769353}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9164815, z: 0.90958923, w: -0.1812191}
+    m_Value: {x: 1, y: 0.9164815, z: 0.90958923, w: 0.1812191}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.84063554, z: 0.7305951, w: 0.11532123}
+    m_Value: {x: 1, y: 0.84063554, z: 0.7305951, w: 0.39538705}
   shadowsStart:
     m_OverrideState: 1
     m_Value: 0
@@ -378,12 +378,12 @@ MonoBehaviour:
     m_Value: 2
   acesPreset:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 5
   hueShiftAmount:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
   detectPaperWhite:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
   paperWhite:
     m_OverrideState: 1

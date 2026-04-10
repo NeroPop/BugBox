@@ -19,6 +19,7 @@ public class TestBugAI : MonoBehaviour
     void Start()
     {
         m_Agent = GetComponent<NavMeshAgent>();
+        StartWalking();
     }
 
     void Update()

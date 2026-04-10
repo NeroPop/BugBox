@@ -462,7 +462,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 923320292}
-  - component: {fileID: 923320291}
   - component: {fileID: 923320293}
   m_Layer: 2
   m_Name: Stick Spawner
@@ -471,21 +470,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &923320291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 923320290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c751607f01df8445c86b012985b8b152, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 4287675444901438133, guid: 6f6aa82a5a5850c40b9f62fc027f846c, type: 3}
-  keyCode: 32
-  spawnedPrefabsHolder: {fileID: 1645357702}
 --- !u!4 &923320292
 Transform:
   m_ObjectHideFlags: 0

@@ -7,9 +7,9 @@ public class CameraPan : MonoBehaviour
     [SerializeField] Transform m_Pivot;
 
     [Header("Pan Settings")]
-    [SerializeField] float m_MaxAngle = 45f;
-    [SerializeField] float m_MinAngle = 0f;
-    [SerializeField] float m_EdgeThreshold = 0.1f;
+    [SerializeField] float m_MaxAngleRight = 45f;
+    [SerializeField] float m_MaxAngleLeft = 0f;
+    [SerializeField] float m_MouseEdgeThreshold = 0.1f;
     [SerializeField] float m_PanSpeed = 45f;
 
     public bool InvertControls = false;
@@ -41,7 +41,7 @@ public class CameraPan : MonoBehaviour
         if (input != 0f)
         {
             m_CurrentAngle += input * m_PanSpeed * Time.deltaTime;
-            m_CurrentAngle = Mathf.Clamp(m_CurrentAngle, m_MinAngle, m_MaxAngle);
+            m_CurrentAngle = Mathf.Clamp(m_CurrentAngle, m_MaxAngleLeft, m_MaxAngleRight);
         }
 
         ApplyCameraTransform();
@@ -55,13 +55,13 @@ public class CameraPan : MonoBehaviour
 
         if (InvertControls)
         {
-            if (mouseX >= 1f - m_EdgeThreshold) return 1f;
-            if (mouseX <= m_EdgeThreshold) return -1f;
+            if (mouseX >= 1f - m_MouseEdgeThreshold) return 1f;
+            if (mouseX <= m_MouseEdgeThreshold) return -1f;
         }
         else
         {
-            if (mouseX >= 1f - m_EdgeThreshold) return -1f;
-            if (mouseX <= m_EdgeThreshold) return 1f;
+            if (mouseX >= 1f - m_MouseEdgeThreshold) return -1f;
+            if (mouseX <= m_MouseEdgeThreshold) return 1f;
         }
 
         return 0f;
@@ -69,7 +69,7 @@ public class CameraPan : MonoBehaviour
 
     void ApplyCameraTransform()
     {
-        float t = Mathf.Abs(m_CurrentAngle) / m_MaxAngle;
+        float t = Mathf.Abs(m_CurrentAngle) / m_MaxAngleRight;
 
         Vector3 localPos = Vector3.Lerp(m_SquareOnPosition, m_CornerPosition, t);
 

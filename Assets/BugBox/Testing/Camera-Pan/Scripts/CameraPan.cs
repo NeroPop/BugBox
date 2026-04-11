@@ -8,9 +8,11 @@ public class CameraPan : MonoBehaviour
 
     [Header("Pan Settings")]
     [SerializeField] float m_MaxAngleRight = 45f;
-    [SerializeField] float m_MaxAngleLeft = 0f;
+    [SerializeField] float m_MaxAngleLeft = -45f;
     [SerializeField] float m_MouseEdgeThreshold = 0.1f;
     [SerializeField] float m_PanSpeed = 45f;
+    [SerializeField] float m_PauseAngle = 0f;
+    [SerializeField] float m_PauseSnapDistance = 1f;
 
     public bool InvertControls = false;
 
@@ -20,6 +22,7 @@ public class CameraPan : MonoBehaviour
     [SerializeField] Vector3 m_CameraRotation = new Vector3(15, 0, 0);
 
     float m_CurrentAngle = 0f;
+    bool m_InputLocked = false;
     InputAction m_MousePositionAction;
 
     void Awake()
@@ -38,10 +41,31 @@ public class CameraPan : MonoBehaviour
     void Update()
     {
         float input = GetEdgeInput();
-        if (input != 0f)
+
+        // Unlock once the mouse has left the edge zone
+        if (m_InputLocked && input == 0f)
+            m_InputLocked = false;
+
+        if (!m_InputLocked && input != 0f)
         {
-            m_CurrentAngle += input * m_PanSpeed * Time.deltaTime;
-            m_CurrentAngle = Mathf.Clamp(m_CurrentAngle, m_MaxAngleLeft, m_MaxAngleRight);
+            bool isPaused = Mathf.Abs(m_CurrentAngle - m_PauseAngle) < 0.01f;
+            bool movingAwayFromPause = (input > 0f && m_CurrentAngle >= m_PauseAngle) ||
+                                      (input < 0f && m_CurrentAngle <= m_PauseAngle);
+
+            if (!isPaused || movingAwayFromPause)
+            {
+                m_CurrentAngle += input * m_PanSpeed * Time.deltaTime;
+                m_CurrentAngle = Mathf.Clamp(m_CurrentAngle, m_MaxAngleLeft, m_MaxAngleRight);
+            }
+
+            bool movingTowardPause = (input < 0f && m_CurrentAngle > m_PauseAngle) ||
+                                     (input > 0f && m_CurrentAngle < m_PauseAngle);
+
+            if (movingTowardPause && Mathf.Abs(m_CurrentAngle - m_PauseAngle) < m_PauseSnapDistance)
+            {
+                m_CurrentAngle = m_PauseAngle;
+                m_InputLocked = true;
+            }
         }
 
         ApplyCameraTransform();

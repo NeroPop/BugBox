@@ -603,37 +603,6 @@ MonoBehaviour:
   PositionOffset: {x: 0, y: 10, z: 0}
   RotationOffsetPositive: {x: 0, y: 0, z: 0.08637331, w: 0.99626285}
   RotationOffsetNegative: {x: 0, y: 0, z: 0.08715588, w: -0.99619466}
---- !u!1 &1053220218
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1053220219}
-  m_Layer: 0
-  m_Name: Jar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1053220219
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053220218}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1072941775
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,7 +1154,7 @@ Transform:
   m_GameObject: {fileID: 1645357701}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1581,7 +1550,7 @@ Camera:
   near clip plane: 8
   far clip plane: 200
   field of view: 65.9
-  orthographic: 1
+  orthographic: 0
   orthographic size: 10
   m_Depth: 0
   m_CullingMask:
@@ -1606,13 +1575,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719995938}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -10, y: 12, z: -10}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 11, z: -23.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!45 &1719995943
 Skybox:
   m_ObjectHideFlags: 0
@@ -1714,7 +1683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.ProbeVolumePerSceneData
   serializedBakingSet: {fileID: 11400000, guid: 95cfccd3e4649f7419f6a1f3b45c54d3, type: 2}
-  sceneGUID: 3f7c901dd9c4b6a4da857420c4bb5e08
+  sceneGUID: 89fd979daa3915644979068f572a3cb7
   obsoleteAsset: {fileID: 0}
   obsoleteCellSharedDataAsset: {fileID: 0}
   obsoleteCellSupportDataAsset: {fileID: 0}
@@ -1818,6 +1787,5 @@ SceneRoots:
   - {fileID: 610271805}
   - {fileID: 1474282399}
   - {fileID: 923320292}
-  - {fileID: 1053220219}
   - {fileID: 1645357702}
   - {fileID: 1906707096}

@@ -12,6 +12,8 @@ public class CameraPan : MonoBehaviour
     [SerializeField] float m_EdgeThreshold = 0.1f;
     [SerializeField] float m_PanSpeed = 45f;
 
+    public bool InvertControls = false;
+
     [Header("Camera Positions")]
     [SerializeField] Vector3 m_SquareOnPosition = new Vector3(0, 11, -21.5f);
     [SerializeField] Vector3 m_CornerPosition = new Vector3(0, 11, -25f);
@@ -51,8 +53,17 @@ public class CameraPan : MonoBehaviour
 
         float mouseX = mousePos.x / Screen.width;
 
-        if (mouseX >= 1f - m_EdgeThreshold) return -1f;
-        if (mouseX <= m_EdgeThreshold) return 1f;
+        if (InvertControls)
+        {
+            if (mouseX >= 1f - m_EdgeThreshold) return 1f;
+            if (mouseX <= m_EdgeThreshold) return -1f;
+        }
+        else
+        {
+            if (mouseX >= 1f - m_EdgeThreshold) return -1f;
+            if (mouseX <= m_EdgeThreshold) return 1f;
+        }
+
         return 0f;
     }
 

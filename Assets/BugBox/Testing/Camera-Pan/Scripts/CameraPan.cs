@@ -8,6 +8,7 @@ public class CameraPan : MonoBehaviour
 
     [Header("Pan Settings")]
     [SerializeField] float m_MaxAngle = 45f;
+    [SerializeField] float m_MinAngle = 0f;
     [SerializeField] float m_EdgeThreshold = 0.1f;
     [SerializeField] float m_PanSpeed = 45f;
 
@@ -38,7 +39,7 @@ public class CameraPan : MonoBehaviour
         if (input != 0f)
         {
             m_CurrentAngle += input * m_PanSpeed * Time.deltaTime;
-            m_CurrentAngle = Mathf.Clamp(m_CurrentAngle, -m_MaxAngle, m_MaxAngle);
+            m_CurrentAngle = Mathf.Clamp(m_CurrentAngle, m_MinAngle, m_MaxAngle);
         }
 
         ApplyCameraTransform();

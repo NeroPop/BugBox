@@ -51,8 +51,8 @@ public class CameraPan : MonoBehaviour
 
         float mouseX = mousePos.x / Screen.width;
 
-        if (mouseX >= 1f - m_EdgeThreshold) return 1f;
-        if (mouseX <= m_EdgeThreshold) return -1f;
+        if (mouseX >= 1f - m_EdgeThreshold) return -1f;
+        if (mouseX <= m_EdgeThreshold) return 1f;
         return 0f;
     }
 

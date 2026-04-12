@@ -25,10 +25,12 @@ public class DrainageLayerPlacer : MonoBehaviour
     [SerializeField] float m_SmoothStrength = 0.1f;
 
     InputAction m_ClickAction;
+    InputAction m_SmoothAction;
     InputAction m_MousePositionAction;
+
     float m_SpawnTimer;
     bool m_IsPouring;
-    bool m_IsSmoothing;
+    bool m_IsHoldingSmooth;
 
     List<DrainageStone> m_Stones = new List<DrainageStone>();
 
@@ -36,6 +38,11 @@ public class DrainageLayerPlacer : MonoBehaviour
     {
         m_ClickAction = new InputAction(
             binding: "<Mouse>/leftButton",
+            type: InputActionType.Button
+        );
+
+        m_SmoothAction = new InputAction(
+            binding: "<Mouse>/rightButton",
             type: InputActionType.Button
         );
 
@@ -47,6 +54,9 @@ public class DrainageLayerPlacer : MonoBehaviour
 
         m_ClickAction.performed += _ => m_IsPouring = true;
         m_ClickAction.canceled += _ => m_IsPouring = false;
+
+        m_SmoothAction.performed += _ => { m_IsHoldingSmooth = true; EnableSmoothing(); };
+        m_SmoothAction.canceled += _ => { m_IsHoldingSmooth = false; EnablePouring(); };
     }
 
     void Start()
@@ -58,50 +68,47 @@ public class DrainageLayerPlacer : MonoBehaviour
     void OnEnable()
     {
         m_ClickAction.Enable();
+        m_SmoothAction.Enable();
         m_MousePositionAction.Enable();
     }
 
     void OnDisable()
     {
         m_ClickAction.Disable();
+        m_SmoothAction.Disable();
         m_MousePositionAction.Disable();
     }
 
     void OnDestroy()
     {
         m_ClickAction.Dispose();
+        m_SmoothAction.Dispose();
         m_MousePositionAction.Dispose();
     }
 
     public void EnableSmoothing()
     {
-        m_IsSmoothing = true;
         foreach (DrainageStone stone in m_Stones)
             stone.SetSmoothing(true);
     }
 
     public void EnablePouring()
     {
-        m_IsSmoothing = false;
         foreach (DrainageStone stone in m_Stones)
             stone.SetSmoothing(false);
     }
 
     void Update()
     {
-        if (m_IsSmoothing)
+        if (m_IsHoldingSmooth)
         {
-            if (m_IsPouring)
-                TrySmooth();
-            else
-            {
-                // Re-kinematic any stones that have settled after being pushed
-                foreach (DrainageStone stone in m_Stones)
-                    stone.Rekinematic();
-            }
-
+            TrySmooth();
             return;
         }
+
+        // Re-kinematic settled stones when not actively smoothing
+        foreach (DrainageStone stone in m_Stones)
+            stone.Rekinematic();
 
         if (!m_IsPouring) return;
 
@@ -168,14 +175,12 @@ public class DrainageLayerPlacer : MonoBehaviour
 
             if (dist > m_SmoothRadius) continue;
 
-            // Direction away from cursor, horizontal only
             Vector3 awayFromCursor = new Vector3(
                 stonePos.x - cursorPoint.x,
                 0f,
                 stonePos.z - cursorPoint.z
             ).normalized;
 
-            // Stones closer to cursor get pushed more
             float influence = 1f - (dist / m_SmoothRadius);
             Vector3 force = awayFromCursor * m_SmoothStrength * influence;
 

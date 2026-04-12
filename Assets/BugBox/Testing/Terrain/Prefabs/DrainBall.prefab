@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2182991653304334519}
   - component: {fileID: 2115697819809046698}
   - component: {fileID: 7717560040159840099}
+  - component: {fileID: -7846377013724168519}
   m_Layer: 0
   m_Name: DrainBall
   m_TagString: Untagged
@@ -140,3 +141,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-7846377013724168519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9218166454360990270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e020adc2c59ebe94ca4bbea037c5b20b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DrainageStone

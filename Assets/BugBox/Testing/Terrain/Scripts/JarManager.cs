@@ -10,9 +10,9 @@ public class JarManager : MonoBehaviour
         DrainageLayer.enabled = false;
     }
 
-    public void PlaceDrainageLayer()
+    public void PlaceDrainageLayer(bool enable)
     {
-        DrainageLayer.enabled = true;
+        DrainageLayer.enabled = enable;
     }
 
     public void PlaceSubstrateBarrier()

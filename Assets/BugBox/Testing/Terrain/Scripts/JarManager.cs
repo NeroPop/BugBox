@@ -35,6 +35,7 @@ public class JarManager : MonoBehaviour
 
     public void PlaceSubstrateLayer()
     {
+        SubstrateLayer.BarrierTransform = BarrierTransform;
         SubstrateLayer.CreateSubstrate();
     }
 

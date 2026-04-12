@@ -13,7 +13,7 @@ public class PlaceSubstrate : MonoBehaviour
     [ReadOnly] public Transform BarrierTransform;
 
     public void CreateSubstrate()
-        {
+    {
         if (BarrierTransform != null)
         {
             GameObject substrate = Instantiate(SubstratePrefab, (BarrierTransform.position + SpawnOffset), Quaternion.identity, SubstrateParent.transform);

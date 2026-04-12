@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 249815370}
   - component: {fileID: 249815369}
   - component: {fileID: 249815368}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -648,13 +648,13 @@ GameObject:
   - component: {fileID: 392149676}
   - component: {fileID: 392149678}
   - component: {fileID: 392149677}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AI Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &392149676
 Transform:
   m_ObjectHideFlags: 0
@@ -1427,7 +1427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 811834623}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1504,7 +1504,7 @@ MonoBehaviour:
   spawnCamera: {fileID: 1719995941}
   spawnLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 65
   PositionOffset: {x: 0, y: 10, z: 0}
   RotationOffsetPositive: {x: 0, y: 0, z: 0.08637331, w: 0.99626285}
   RotationOffsetNegative: {x: 0, y: 0, z: 0.08715588, w: -0.99619466}
@@ -1745,7 +1745,8 @@ GameObject:
   - component: {fileID: 1072941776}
   - component: {fileID: 1072941779}
   - component: {fileID: 1072941778}
-  m_Layer: 0
+  - component: {fileID: 1072941780}
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1824,6 +1825,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072941775}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1072941780
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072941775}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 0.1, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1209654827
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2516,7 +2538,7 @@ GameObject:
   - component: {fileID: 1544663787}
   - component: {fileID: 1544663786}
   - component: {fileID: 1544663785}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2628,7 +2650,7 @@ GameObject:
   - component: {fileID: 1609356984}
   - component: {fileID: 1609356983}
   - component: {fileID: 1609356982}
-  m_Layer: 4
+  m_Layer: 6
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2740,7 +2762,7 @@ GameObject:
   - component: {fileID: 1645357703}
   - component: {fileID: 1645357704}
   m_Layer: 0
-  m_Name: Geometry
+  m_Name: AI Walkable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3033,7 +3055,7 @@ GameObject:
   - component: {fileID: 1709105055}
   - component: {fileID: 1709105054}
   - component: {fileID: 1709105053}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3294,6 +3316,59 @@ MonoBehaviour:
   m_SquareOnPosition: {x: 0, y: 11, z: -21.5}
   m_CornerPosition: {x: 0, y: 11, z: -25}
   m_CameraRotation: {x: 15, y: 0, z: 0}
+--- !u!1 &1728440456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1728440458}
+  - component: {fileID: 1728440457}
+  m_Layer: 0
+  m_Name: Object Destroyer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1728440457
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728440456}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1728440458
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728440456}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalScale: {x: 30, y: 3, z: 30}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1779710616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3717,7 +3792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2037760096}
-  - component: {fileID: 2037760095}
+  - component: {fileID: 2037760097}
   m_Layer: 2
   m_Name: DrainageLayer
   m_TagString: Untagged
@@ -3725,27 +3800,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2037760095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2037760094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e30b8537a8307147863b27c8c7bf056, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DropItem
-  prefab: {fileID: 6631744311169712849, guid: 0487afb965de7004085ce2a43e0aea29, type: 3}
-  spawnedPrefabsHolder: {fileID: 1645357702}
-  spawnCamera: {fileID: 1719995941}
-  spawnLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  PositionOffset: {x: 0, y: 10, z: 0}
-  RotationOffsetPositive: {x: 0, y: 0, z: 0.08637331, w: 0.99626285}
-  RotationOffsetNegative: {x: 0, y: 0, z: 0.08715588, w: -0.99619466}
 --- !u!4 &2037760096
 Transform:
   m_ObjectHideFlags: 0
@@ -3761,6 +3815,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2037760097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037760094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d81618eed1dfb9f4bb0b3a499ecfae13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DrainageLayerPlacer
+  m_StonePrefab: {fileID: 9218166454360990270, guid: ef6141c1223116d4fa960ea337c235f8, type: 3}
+  m_StoneHolder: {fileID: 2037760096}
+  m_Camera: {fileID: 1719995941}
+  m_SpawnRate: 0.02
+  m_SpawnRadius: 5
+  m_SpawnHeight: 1
+  m_SpawnLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3770,8 +3845,9 @@ SceneRoots:
   - {fileID: 1357499378}
   - {fileID: 1474282399}
   - {fileID: 923320292}
-  - {fileID: 2037760096}
   - {fileID: 1645357702}
+  - {fileID: 2037760096}
   - {fileID: 1906707096}
   - {fileID: 1666047794}
   - {fileID: 790022181}
+  - {fileID: 1728440458}

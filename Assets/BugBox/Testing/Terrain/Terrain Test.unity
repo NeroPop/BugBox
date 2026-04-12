@@ -4094,7 +4094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlaceSubstrate
   Manager: {fileID: 1516685126}
-  SubstratePrefab: {fileID: 0}
+  SubstratePrefab: {fileID: 842868068953093479, guid: da599b13eab22b243ae38a479371b5cb, type: 3}
   SubstrateParent: {fileID: 1645357701}
   SpawnOffset: {x: 0, y: 0.1, z: 0}
   BarrierTransform: {fileID: 0}

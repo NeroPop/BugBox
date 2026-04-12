@@ -89,12 +89,15 @@ public class DrainageLayerPlacer : MonoBehaviour
 
         Vector3 floorPoint = cameraRay.GetPoint(enter);
 
-        // Clamp the floor point to within the tank bounds so pressing 
-        // against the back glass doesn't spawn outside
+        // Apply random spread first
+        Vector2 randomCircle = Random.insideUnitCircle * m_SpawnRadius;
+        Vector3 spreadPoint = floorPoint + new Vector3(randomCircle.x, 0f, randomCircle.y);
+
+        // Clamp the spread point to bounds before raycasting downward
         Vector3 clampedPoint = new Vector3(
-            Mathf.Clamp(floorPoint.x, m_TankBoundsMin.x, m_TankBoundsMax.x),
-            floorPoint.y,
-            Mathf.Clamp(floorPoint.z, m_TankBoundsMin.z, m_TankBoundsMax.z)
+            Mathf.Clamp(spreadPoint.x, m_TankBoundsMin.x, m_TankBoundsMax.x),
+            spreadPoint.y,
+            Mathf.Clamp(spreadPoint.z, m_TankBoundsMin.z, m_TankBoundsMax.z)
         );
 
         Vector3 rayOrigin = clampedPoint + Vector3.up * m_SpawnHeight;
@@ -103,9 +106,7 @@ public class DrainageLayerPlacer : MonoBehaviour
         if (!Physics.Raycast(downwardRay, out RaycastHit hit, m_SpawnHeight * 2f, m_SpawnLayerMask))
             return;
 
-        Vector2 randomCircle = Random.insideUnitCircle * m_SpawnRadius;
-        Vector3 spawnPosition = hit.point
-                              + new Vector3(randomCircle.x, m_SpawnHeight, randomCircle.y);
+        Vector3 spawnPosition = hit.point + Vector3.up * m_SpawnHeight;
 
         Instantiate(m_StonePrefab, spawnPosition, Random.rotation, m_StoneHolder);
     }

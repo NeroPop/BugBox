@@ -3831,8 +3831,8 @@ MonoBehaviour:
   m_StonePrefab: {fileID: 9218166454360990270, guid: ef6141c1223116d4fa960ea337c235f8, type: 3}
   m_StoneHolder: {fileID: 2037760096}
   m_Camera: {fileID: 1719995941}
-  m_TankBoundsMin: {x: -19, y: 0, z: -19}
-  m_TankBoundsMax: {x: 19, y: 0, z: 19}
+  m_TankBoundsMin: {x: -18, y: 0, z: -18}
+  m_TankBoundsMax: {x: 18, y: 0, z: 18}
   m_SpawnRate: 0.01
   m_SpawnRadius: 5
   m_SpawnHeight: 5

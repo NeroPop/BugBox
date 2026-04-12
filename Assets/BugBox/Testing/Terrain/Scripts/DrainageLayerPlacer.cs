@@ -182,25 +182,4 @@ public class DrainageLayerPlacer : MonoBehaviour
             stone.ApplySmoothForce(force);
         }
     }
-
-    float GetAverageHeightAround(Vector3 centre)
-    {
-        float total = 0f;
-        int count = 0;
-
-        foreach (DrainageStone stone in m_Stones)
-        {
-            float dist = Vector2.Distance(
-                new Vector2(stone.transform.position.x, stone.transform.position.z),
-                new Vector2(centre.x, centre.z)
-            );
-
-            if (dist > m_SmoothRadius) continue;
-
-            total += stone.transform.position.y;
-            count++;
-        }
-
-        return count > 0 ? total / count : centre.y;
-    }
 }

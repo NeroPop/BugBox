@@ -25,7 +25,9 @@ public class SubstrateTerrain : MonoBehaviour
 
     MeshFilter m_MeshFilter;
     MeshCollider m_MeshCollider;
+    SubstrateMeshGenerator m_MeshGenerator;
     Camera m_Camera;
+    float m_TopFaceY;
 
     InputAction m_RaiseAction;
     InputAction m_LowerAction;
@@ -33,7 +35,6 @@ public class SubstrateTerrain : MonoBehaviour
 
     bool m_IsRaising;
     bool m_IsLowering;
-
     AsyncOperation m_LastNavMeshUpdate;
 
     void Awake()
@@ -59,13 +60,17 @@ public class SubstrateTerrain : MonoBehaviour
         m_Camera = Camera.main;
         m_MeshFilter = GetComponent<MeshFilter>();
         m_MeshCollider = GetComponent<MeshCollider>();
+        m_MeshGenerator = GetComponent<SubstrateMeshGenerator>();
 
-        // Convert world space barrier height to local space for vertex clamping
         m_MinHeight = transform.InverseTransformPoint(
-            new Vector3(0, (BarrierTransform.position.y + m_MinHeightOffset), 0)).y;
-
+            new Vector3(0, BarrierTransform.position.y + m_MinHeightOffset, 0)).y;
         m_MaxHeight = transform.InverseTransformPoint(
-            new Vector3(0, (LidTransform.position.y + m_MaxHeightOffset), 0)).y;
+            new Vector3(0, LidTransform.position.y + m_MaxHeightOffset, 0)).y;
+
+        // Find the top face Y — highest vertex in the freshly generated mesh
+        m_TopFaceY = float.MinValue;
+        foreach (Vector3 v in m_MeshFilter.mesh.vertices)
+            if (v.y > m_TopFaceY) m_TopFaceY = v.y;
     }
 
     void OnEnable()
@@ -111,6 +116,9 @@ public class SubstrateTerrain : MonoBehaviour
 
         for (int i = 0; i < verts.Length; i++)
         {
+            // Only modify top face vertices, leave sides and bottom alone
+            if (verts[i].y < m_TopFaceY - 0.001f) continue;
+
             Vector3 worldVert = transform.TransformPoint(verts[i]);
             float gaussian = Gaussian(worldVert, centre, m_Radius);
             float newY = verts[i].y + displacement.y * gaussian;
@@ -121,6 +129,10 @@ public class SubstrateTerrain : MonoBehaviour
         mesh.vertices = verts;
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
+
+        // Sync sides to match the newly deformed top face edges
+        if (m_MeshGenerator != null)
+            m_MeshGenerator.SyncSidesToTopFace();
     }
 
     void UpdateNavMesh()

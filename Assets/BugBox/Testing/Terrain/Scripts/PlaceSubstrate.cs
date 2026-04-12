@@ -14,11 +14,12 @@ public class PlaceSubstrate : MonoBehaviour
 
     public void CreateSubstrate()
         {
-            if (BarrierTransform != null)
-            {
-                GameObject substrate = Instantiate(SubstratePrefab, (BarrierTransform.position + SpawnOffset), Quaternion.identity, SubstrateParent.transform);
-                //Here I can add code to disable components on the Drainage stones
-            }
+        if (BarrierTransform != null)
+        {
+            GameObject substrate = Instantiate(SubstratePrefab, (BarrierTransform.position + SpawnOffset), Quaternion.identity, SubstrateParent.transform);
+
+            substrate.GetComponent<SubstrateTerrain>().BarrierTransform = BarrierTransform;
+        }
         else { Debug.LogError("BarrierTransform is not set. Please place the substrate barrier first."); }
     }
 }

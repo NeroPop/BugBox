@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 249815370}
   - component: {fileID: 249815369}
   - component: {fileID: 249815368}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2526,7 +2526,7 @@ GameObject:
   - component: {fileID: 1544663787}
   - component: {fileID: 1544663786}
   - component: {fileID: 1544663785}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3043,7 +3043,7 @@ GameObject:
   - component: {fileID: 1709105055}
   - component: {fileID: 1709105054}
   - component: {fileID: 1709105053}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3831,9 +3831,12 @@ MonoBehaviour:
   m_StonePrefab: {fileID: 9218166454360990270, guid: ef6141c1223116d4fa960ea337c235f8, type: 3}
   m_StoneHolder: {fileID: 2037760096}
   m_Camera: {fileID: 1719995941}
+  m_TankBoundsMin: {x: -19, y: 0, z: -19}
+  m_TankBoundsMax: {x: 19, y: 0, z: 19}
   m_SpawnRate: 0.01
   m_SpawnRadius: 5
-  m_SpawnHeight: 1
+  m_SpawnHeight: 5
+  m_FloorPosition: {x: 0, y: 0, z: 0}
   m_SpawnLayerMask:
     serializedVersion: 2
     m_Bits: 64

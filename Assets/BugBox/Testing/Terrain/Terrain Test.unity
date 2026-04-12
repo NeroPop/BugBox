@@ -2734,8 +2734,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4bf33664bb71c469f0fd172904ec49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JarManager
-  DrainageLayer: {fileID: 0}
-  SubstrateBarrier: {fileID: 0}
+  DrainageLayer: {fileID: 2037760097}
+  SubstrateBarrier: {fileID: 479393858}
 --- !u!1 &1544663783
 GameObject:
   m_ObjectHideFlags: 0

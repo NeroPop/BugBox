@@ -9,6 +9,7 @@ public class JarManager : MonoBehaviour
     [SerializeField] PlaceSubstrate SubstrateLayer;
 
     [Header("References")]
+    [SerializeField] private UIController UIController;
     [ReadOnly] public Transform BarrierTransform;
 
     private void Start()
@@ -24,6 +25,12 @@ public class JarManager : MonoBehaviour
     public void PlaceSubstrateBarrier()
     {
         SubstrateBarrier.PlaceBarrier();
+    }
+
+    public void SubstrateBarrierSettled()
+    {
+        //SubstrateBarrier has finished settling, so we can now enable the substrate layer placement panel
+        UIController.EnableSubstraitPanel();
     }
 
     public void PlaceSubstrateLayer()

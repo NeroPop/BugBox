@@ -33,7 +33,7 @@ public class PlaceSubstrateBarrier : MonoBehaviour
             rb.isKinematic = true;
 
             Manager.BarrierTransform = substrateBarrier.transform;
-            //Here I can add code to disable components on the Drainage stones
+            Manager.SubstrateBarrierSettled();
         }
         yield return null;
     }

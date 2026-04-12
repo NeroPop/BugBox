@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 249815370}
   - component: {fileID: 249815369}
   - component: {fileID: 249815368}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1051,7 +1051,7 @@ MonoBehaviour:
   BarrierParent: {fileID: 479393857}
   SpawnPosition: {x: 0, y: 15, z: 0}
   SpawnRotation: {x: 0, y: 0, z: 0, w: 1}
-  SettleTime: 5
+  SettleTime: 3
 --- !u!1 &488227224
 GameObject:
   m_ObjectHideFlags: 0
@@ -3033,7 +3033,7 @@ GameObject:
   - component: {fileID: 1544663787}
   - component: {fileID: 1544663786}
   - component: {fileID: 1544663785}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3145,7 +3145,7 @@ GameObject:
   - component: {fileID: 1609356984}
   - component: {fileID: 1609356983}
   - component: {fileID: 1609356982}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3687,7 +3687,7 @@ GameObject:
   - component: {fileID: 1709105055}
   - component: {fileID: 1709105054}
   - component: {fileID: 1709105053}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

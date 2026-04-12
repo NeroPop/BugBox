@@ -6,6 +6,7 @@ public class JarManager : MonoBehaviour
     [Header("Layers")]
     [SerializeField] DrainageLayerPlacer DrainageLayer;
     [SerializeField] PlaceSubstrateBarrier SubstrateBarrier;
+    [SerializeField] PlaceSubstrate SubstrateLayer;
 
     [Header("References")]
     [ReadOnly] public Transform BarrierTransform;
@@ -24,4 +25,10 @@ public class JarManager : MonoBehaviour
     {
         SubstrateBarrier.PlaceBarrier();
     }
+
+    public void PlaceSubstrateLayer()
+    {
+        SubstrateLayer.CreateSubstrate();
+    }
+
 }

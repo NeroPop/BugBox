@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DrainageStone : MonoBehaviour
 {
-    [SerializeField] float m_SettleTime = 1f;  // seconds to wait after spawning before allowing kinematic
+    [SerializeField] float m_SettleTime = 1f;
 
     Rigidbody m_Rigidbody;
     bool m_SmoothingPending;
@@ -38,5 +38,20 @@ public class DrainageStone : MonoBehaviour
             m_SmoothingPending = false;
             m_Rigidbody.isKinematic = false;
         }
+    }
+
+    public void ApplySmoothForce(Vector3 force)
+    {
+        // Temporarily non-kinematic so physics can move it
+        m_Rigidbody.isKinematic = false;
+        m_Rigidbody.AddForce(force, ForceMode.VelocityChange);
+    }
+
+    public void Rekinematic()
+    {
+        if (m_Rigidbody.IsSleeping())
+            m_Rigidbody.isKinematic = true;
+        else
+            m_SmoothingPending = true;
     }
 }

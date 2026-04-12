@@ -93,6 +93,12 @@ public class DrainageLayerPlacer : MonoBehaviour
         {
             if (m_IsPouring)
                 TrySmooth();
+            else
+            {
+                // Re-kinematic any stones that have settled after being pushed
+                foreach (DrainageStone stone in m_Stones)
+                    stone.Rekinematic();
+            }
 
             return;
         }
@@ -150,22 +156,30 @@ public class DrainageLayerPlacer : MonoBehaviour
             return;
 
         Vector3 cursorPoint = cameraRay.GetPoint(enter);
-        float averageY = GetAverageHeightAround(cursorPoint);
 
         foreach (DrainageStone stone in m_Stones)
         {
+            Vector3 stonePos = stone.transform.position;
+
             float dist = Vector2.Distance(
-                new Vector2(stone.transform.position.x, stone.transform.position.z),
+                new Vector2(stonePos.x, stonePos.z),
                 new Vector2(cursorPoint.x, cursorPoint.z)
             );
 
             if (dist > m_SmoothRadius) continue;
 
-            float influence = 1f - (dist / m_SmoothRadius);
+            // Direction away from cursor, horizontal only
+            Vector3 awayFromCursor = new Vector3(
+                stonePos.x - cursorPoint.x,
+                0f,
+                stonePos.z - cursorPoint.z
+            ).normalized;
 
-            Vector3 pos = stone.transform.position;
-            pos.y = Mathf.Lerp(pos.y, averageY, m_SmoothStrength * influence);
-            stone.transform.position = pos;
+            // Stones closer to cursor get pushed more
+            float influence = 1f - (dist / m_SmoothRadius);
+            Vector3 force = awayFromCursor * m_SmoothStrength * influence;
+
+            stone.ApplySmoothForce(force);
         }
     }
 

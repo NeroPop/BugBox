@@ -153,3 +153,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e020adc2c59ebe94ca4bbea037c5b20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DrainageStone
+  m_SettleTime: 3

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,16 +14,23 @@ public class DrainageLayerPlacer : MonoBehaviour
     [SerializeField] Vector3 m_TankBoundsMax = new Vector3(19f, 0f, 19f);
 
     [Header("Spawning")]
-    [SerializeField] float m_SpawnRate = 0.05f;        // seconds between each spawn
-    [SerializeField] float m_SpawnRadius = 0.5f;       // random spread around cursor
-    [SerializeField] float m_SpawnHeight = 1f;         // how high above the hit point to spawn
+    [SerializeField] float m_SpawnRate = 0.05f;
+    [SerializeField] float m_SpawnRadius = 0.5f;
+    [SerializeField] float m_SpawnHeight = 1f;
     [SerializeField] Vector3 m_FloorPosition = Vector3.zero;
     [SerializeField] LayerMask m_SpawnLayerMask = Physics.DefaultRaycastLayers;
+
+    [Header("Smoothing")]
+    [SerializeField] float m_SmoothRadius = 3f;
+    [SerializeField] float m_SmoothStrength = 0.1f;
 
     InputAction m_ClickAction;
     InputAction m_MousePositionAction;
     float m_SpawnTimer;
     bool m_IsPouring;
+    bool m_IsSmoothing;
+
+    List<DrainageStone> m_Stones = new List<DrainageStone>();
 
     void Awake()
     {
@@ -65,8 +73,30 @@ public class DrainageLayerPlacer : MonoBehaviour
         m_MousePositionAction.Dispose();
     }
 
+    public void EnableSmoothing()
+    {
+        m_IsSmoothing = true;
+        foreach (DrainageStone stone in m_Stones)
+            stone.SetSmoothing(true);
+    }
+
+    public void EnablePouring()
+    {
+        m_IsSmoothing = false;
+        foreach (DrainageStone stone in m_Stones)
+            stone.SetSmoothing(false);
+    }
+
     void Update()
     {
+        if (m_IsSmoothing)
+        {
+            if (m_IsPouring)
+                TrySmooth();
+
+            return;
+        }
+
         if (!m_IsPouring) return;
 
         m_SpawnTimer -= Time.deltaTime;
@@ -88,12 +118,9 @@ public class DrainageLayerPlacer : MonoBehaviour
             return;
 
         Vector3 floorPoint = cameraRay.GetPoint(enter);
-
-        // Apply random spread first
         Vector2 randomCircle = Random.insideUnitCircle * m_SpawnRadius;
         Vector3 spreadPoint = floorPoint + new Vector3(randomCircle.x, 0f, randomCircle.y);
 
-        // Clamp the spread point to bounds before raycasting downward
         Vector3 clampedPoint = new Vector3(
             Mathf.Clamp(spreadPoint.x, m_TankBoundsMin.x, m_TankBoundsMax.x),
             spreadPoint.y,
@@ -108,6 +135,58 @@ public class DrainageLayerPlacer : MonoBehaviour
 
         Vector3 spawnPosition = hit.point + Vector3.up * m_SpawnHeight;
 
-        Instantiate(m_StonePrefab, spawnPosition, Random.rotation, m_StoneHolder);
+        GameObject spawned = Instantiate(m_StonePrefab, spawnPosition, Random.rotation, m_StoneHolder);
+        m_Stones.Add(spawned.GetComponent<DrainageStone>());
+    }
+
+    void TrySmooth()
+    {
+        Vector2 mousePos = m_MousePositionAction.ReadValue<Vector2>();
+        Ray cameraRay = m_Camera.ScreenPointToRay(mousePos);
+
+        Plane floorPlane = new Plane(Vector3.up, m_FloorPosition);
+
+        if (!floorPlane.Raycast(cameraRay, out float enter))
+            return;
+
+        Vector3 cursorPoint = cameraRay.GetPoint(enter);
+        float averageY = GetAverageHeightAround(cursorPoint);
+
+        foreach (DrainageStone stone in m_Stones)
+        {
+            float dist = Vector2.Distance(
+                new Vector2(stone.transform.position.x, stone.transform.position.z),
+                new Vector2(cursorPoint.x, cursorPoint.z)
+            );
+
+            if (dist > m_SmoothRadius) continue;
+
+            float influence = 1f - (dist / m_SmoothRadius);
+
+            Vector3 pos = stone.transform.position;
+            pos.y = Mathf.Lerp(pos.y, averageY, m_SmoothStrength * influence);
+            stone.transform.position = pos;
+        }
+    }
+
+    float GetAverageHeightAround(Vector3 centre)
+    {
+        float total = 0f;
+        int count = 0;
+
+        foreach (DrainageStone stone in m_Stones)
+        {
+            float dist = Vector2.Distance(
+                new Vector2(stone.transform.position.x, stone.transform.position.z),
+                new Vector2(centre.x, centre.z)
+            );
+
+            if (dist > m_SmoothRadius) continue;
+
+            total += stone.transform.position.y;
+            count++;
+        }
+
+        return count > 0 ? total / count : centre.y;
     }
 }

@@ -5,6 +5,7 @@ public class PlaceSubstrate : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private JarManager Manager;
+    [SerializeField] private Transform LidTransform;
     [SerializeField] private GameObject SubstratePrefab;
     [SerializeField] private GameObject SubstrateParent;
 
@@ -19,6 +20,7 @@ public class PlaceSubstrate : MonoBehaviour
             GameObject substrate = Instantiate(SubstratePrefab, (BarrierTransform.position + SpawnOffset), Quaternion.identity, SubstrateParent.transform);
 
             substrate.GetComponent<SubstrateTerrain>().BarrierTransform = BarrierTransform;
+            substrate.GetComponent<SubstrateTerrain>().LidTransform = LidTransform;
         }
         else { Debug.LogError("BarrierTransform is not set. Please place the substrate barrier first."); }
     }

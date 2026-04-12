@@ -13,8 +13,11 @@ public class SubstrateTerrain : MonoBehaviour
     [SerializeField] float m_Power = 2.0f;
 
     [Header("Terrain Limits")]
-    [SerializeField] float m_MaxHeight = 5f;
+    [ReadOnly][SerializeField] float m_MaxHeight = 5f;
+    [SerializeField] float m_MaxHeightOffset = 0f;
     [ReadOnly][SerializeField] float m_MinHeight = 0f;
+    [SerializeField] float m_MinHeightOffset = 0f;
+    [ReadOnly] public Transform LidTransform;
     [ReadOnly] public Transform BarrierTransform;
 
     [Header("NavMesh")]
@@ -57,7 +60,12 @@ public class SubstrateTerrain : MonoBehaviour
         m_MeshFilter = GetComponent<MeshFilter>();
         m_MeshCollider = GetComponent<MeshCollider>();
 
-        m_MinHeight = BarrierTransform.position.y;
+        // Convert world space barrier height to local space for vertex clamping
+        m_MinHeight = transform.InverseTransformPoint(
+            new Vector3(0, (BarrierTransform.position.y + m_MinHeightOffset), 0)).y;
+
+        m_MaxHeight = transform.InverseTransformPoint(
+            new Vector3(0, (LidTransform.position.y + m_MaxHeightOffset), 0)).y;
     }
 
     void OnEnable()

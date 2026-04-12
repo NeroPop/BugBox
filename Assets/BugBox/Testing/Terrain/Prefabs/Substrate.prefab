@@ -126,3 +126,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60e3127c1229088428c8b9db3af985d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SubstrateTerrain
+  m_Radius: 1
+  m_Power: 0.5
+  m_MaxHeight: 5
+  m_MaxHeightOffset: -7
+  m_MinHeight: 0
+  m_MinHeightOffset: 0.1
+  LidTransform: {fileID: 0}
+  BarrierTransform: {fileID: 0}
+  m_NavMeshSurface: {fileID: 0}

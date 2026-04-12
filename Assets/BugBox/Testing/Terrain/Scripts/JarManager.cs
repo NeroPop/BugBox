@@ -1,9 +1,14 @@
 using UnityEngine;
+using CustomAttributes;
 
 public class JarManager : MonoBehaviour
 {
+    [Header("Layers")]
     [SerializeField] DrainageLayerPlacer DrainageLayer;
     [SerializeField] PlaceSubstrateBarrier SubstrateBarrier;
+
+    [Header("References")]
+    [ReadOnly] public Transform BarrierTransform;
 
     private void Start()
     {

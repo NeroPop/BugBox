@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlaceSubstrateBarrier : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] private JarManager Manager;
     [SerializeField] private GameObject BarrierPrefab;
     [SerializeField] private Transform BarrierParent;
 
@@ -30,7 +31,9 @@ public class PlaceSubstrateBarrier : MonoBehaviour
         if (rb != null)
         {
             rb.isKinematic = true;
-            //Here I can add code to disable components on the Drainage stones
+
+            Manager.BarrierTransform = substrateBarrier.transform;
+            Manager.SubstrateBarrierSettled();
         }
         yield return null;
     }

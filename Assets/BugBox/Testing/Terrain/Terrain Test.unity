@@ -1357,7 +1357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &488227225
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2098,7 +2098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1038195228
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2758,6 +2758,7 @@ MonoBehaviour:
   AddSubstrateButton: {fileID: 1764030007}
   EnableSmoothButton: {fileID: 159283200}
   EnableSubstrateEditButton: {fileID: 43816326}
+  DrainageLayerText: {fileID: 668792802}
   DebugMode: 0
 --- !u!1 &1411012819
 GameObject:
@@ -4606,8 +4607,10 @@ MonoBehaviour:
   m_StonePrefab: {fileID: 9218166454360990270, guid: ef6141c1223116d4fa960ea337c235f8, type: 3}
   m_StoneHolder: {fileID: 2037760096}
   m_Camera: {fileID: 1719995941}
+  Manager: {fileID: 1516685126}
   m_TankBoundsMin: {x: -18, y: 0, z: -18}
   m_TankBoundsMax: {x: 18, y: 0, z: 18}
+  m_MaxStoneNumber: 1000
   m_SpawnRate: 0.01
   m_SpawnRadius: 5
   m_SpawnHeight: 5

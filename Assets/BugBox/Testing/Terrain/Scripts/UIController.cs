@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject AddSubstrateButton;
     [SerializeField] private GameObject EnableSmoothButton;
     [SerializeField] private GameObject EnableSubstrateEditButton;
+
+    [Header("Text")]
+    [SerializeField] private TMP_Text DrainageLayerText;
 
     [SerializeField] private bool DebugMode = false;
 
@@ -44,6 +48,11 @@ public class UIController : MonoBehaviour
 
         //Calls the method in JarManager to enable the drainage layer placement script
         jarManager.PlaceDrainageLayer(true);
+    }
+
+    public void DrainageLayerFull()
+    {
+        DrainageLayerText.text = "The Drainage Layer is Full";
     }
 
     public void DrainageDone()

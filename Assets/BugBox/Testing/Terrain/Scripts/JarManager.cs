@@ -22,6 +22,11 @@ public class JarManager : MonoBehaviour
         DrainageLayer.enabled = enable;
     }
 
+    public void DrainageLayerFull()
+    {
+        UIController.DrainageLayerFull();
+    }
+
     public void PlaceSubstrateBarrier()
     {
         SubstrateBarrier.PlaceBarrier();

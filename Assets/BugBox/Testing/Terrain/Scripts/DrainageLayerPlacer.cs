@@ -8,6 +8,7 @@ public class DrainageLayerPlacer : MonoBehaviour
     [SerializeField] GameObject m_StonePrefab;
     [SerializeField] Transform m_StoneHolder;
     [SerializeField] Camera m_Camera;
+    [SerializeField] JarManager Manager;
 
     [Header("Tank Bounds")]
     [SerializeField] Vector3 m_TankBoundsMin = new Vector3(-19f, 0f, -19f);
@@ -125,6 +126,7 @@ public class DrainageLayerPlacer : MonoBehaviour
     {
         if (m_Stones.Count >= m_MaxStoneNumber)
         {
+            Manager.DrainageLayerFull();
             Debug.Log("Reached max stone count. Stopping pouring.");
         }
         else

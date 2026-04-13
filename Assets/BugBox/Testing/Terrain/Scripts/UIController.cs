@@ -13,7 +13,14 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject SubstrateBarrierPanel;
     [SerializeField] private GameObject SubstrateLayerPanel;
 
+    [Header("Buttons")]
+    [SerializeField] private GameObject AddSubstrateButton;
+    [SerializeField] private GameObject EnableSmoothButton;
+    [SerializeField] private GameObject EnableSubstrateEditButton;
+
     [SerializeField] private bool DebugMode = false;
+
+    private bool SubstrateSmooth = false;
 
     private void Start()
     {
@@ -66,17 +73,30 @@ public class UIController : MonoBehaviour
     public void EnableSubstraitPanel()
     {
         SubstrateLayerPanel.SetActive(true);
+
+        AddSubstrateButton.SetActive(true);
+        EnableSmoothButton.SetActive(false);
+        EnableSubstrateEditButton.SetActive(false);
     }
 
     public void AddSubstrate()
     {
-        //Removes all panels from the screen
-        StartPanel.SetActive(false);
-        DrainagePanel.SetActive(false);
-        SubstrateBarrierPanel.SetActive(false);
-        SubstrateLayerPanel.SetActive(false);
-
         //Calls the method in JarManager to place the substrate layer
         jarManager.PlaceSubstrateLayer();
+
+        AddSubstrateButton.SetActive(false); //Disables the add substrate button to prevent multiple substrates being added
+
+        EnableSmoothSubstrate(false);
+    }
+
+    public void EnableSmoothSubstrate( bool smooth)
+    {
+        SubstrateSmooth = smooth;
+
+        //Enables the smooth substrate button
+        EnableSmoothButton.SetActive(!SubstrateSmooth);
+        EnableSubstrateEditButton.SetActive(SubstrateSmooth);
+
+        jarManager.EnableSubstrateSmoothBrush(SubstrateSmooth);
     }
 }

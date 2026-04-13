@@ -13,6 +13,8 @@ public class PlaceSubstrate : MonoBehaviour
     [SerializeField] private Vector3 SpawnOffset;
     [ReadOnly] public Transform BarrierTransform;
 
+    private SubstrateTerrain terrain;
+
     public void CreateSubstrate()
     {
         if (BarrierTransform != null)
@@ -21,10 +23,13 @@ public class PlaceSubstrate : MonoBehaviour
 
             substrate.GetComponent<SubstrateMeshGenerator>().Generate();
 
-            SubstrateTerrain terrain = substrate.GetComponent<SubstrateTerrain>();
+            terrain = substrate.GetComponent<SubstrateTerrain>();
             terrain.BarrierTransform = BarrierTransform;
             terrain.LidTransform = LidTransform;
         }
         else { Debug.LogError("BarrierTransform is not set. Please place the substrate barrier first."); }
     }
+
+    public void EnableSmoothBrush() => terrain?.EnableSmoothBrush();
+    public void DisableSmoothBrush() => terrain?.DisableSmoothBrush();
 }

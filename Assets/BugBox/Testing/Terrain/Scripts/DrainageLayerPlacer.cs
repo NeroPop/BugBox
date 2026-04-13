@@ -8,10 +8,12 @@ public class DrainageLayerPlacer : MonoBehaviour
     [SerializeField] GameObject m_StonePrefab;
     [SerializeField] Transform m_StoneHolder;
     [SerializeField] Camera m_Camera;
+    [SerializeField] JarManager Manager;
 
     [Header("Tank Bounds")]
     [SerializeField] Vector3 m_TankBoundsMin = new Vector3(-19f, 0f, -19f);
     [SerializeField] Vector3 m_TankBoundsMax = new Vector3(19f, 0f, 19f);
+    [SerializeField] float m_MaxStoneNumber = 1000f;
 
     [Header("Spawning")]
     [SerializeField] float m_SpawnRate = 0.05f;
@@ -122,34 +124,42 @@ public class DrainageLayerPlacer : MonoBehaviour
 
     void TrySpawnStone()
     {
-        Vector2 mousePos = m_MousePositionAction.ReadValue<Vector2>();
-        Ray cameraRay = m_Camera.ScreenPointToRay(mousePos);
+        if (m_Stones.Count >= m_MaxStoneNumber)
+        {
+            Manager.DrainageLayerFull();
+            Debug.Log("Reached max stone count. Stopping pouring.");
+        }
+        else
+        {
+            Vector2 mousePos = m_MousePositionAction.ReadValue<Vector2>();
+            Ray cameraRay = m_Camera.ScreenPointToRay(mousePos);
 
-        Plane floorPlane = new Plane(Vector3.up, m_FloorPosition);
+            Plane floorPlane = new Plane(Vector3.up, m_FloorPosition);
 
-        if (!floorPlane.Raycast(cameraRay, out float enter))
-            return;
+            if (!floorPlane.Raycast(cameraRay, out float enter))
+                return;
 
-        Vector3 floorPoint = cameraRay.GetPoint(enter);
-        Vector2 randomCircle = Random.insideUnitCircle * m_SpawnRadius;
-        Vector3 spreadPoint = floorPoint + new Vector3(randomCircle.x, 0f, randomCircle.y);
+            Vector3 floorPoint = cameraRay.GetPoint(enter);
+            Vector2 randomCircle = Random.insideUnitCircle * m_SpawnRadius;
+            Vector3 spreadPoint = floorPoint + new Vector3(randomCircle.x, 0f, randomCircle.y);
 
-        Vector3 clampedPoint = new Vector3(
-            Mathf.Clamp(spreadPoint.x, m_TankBoundsMin.x, m_TankBoundsMax.x),
-            spreadPoint.y,
-            Mathf.Clamp(spreadPoint.z, m_TankBoundsMin.z, m_TankBoundsMax.z)
-        );
+            Vector3 clampedPoint = new Vector3(
+                Mathf.Clamp(spreadPoint.x, m_TankBoundsMin.x, m_TankBoundsMax.x),
+                spreadPoint.y,
+                Mathf.Clamp(spreadPoint.z, m_TankBoundsMin.z, m_TankBoundsMax.z)
+            );
 
-        Vector3 rayOrigin = clampedPoint + Vector3.up * m_SpawnHeight;
-        Ray downwardRay = new Ray(rayOrigin, Vector3.down);
+            Vector3 rayOrigin = clampedPoint + Vector3.up * m_SpawnHeight;
+            Ray downwardRay = new Ray(rayOrigin, Vector3.down);
 
-        if (!Physics.Raycast(downwardRay, out RaycastHit hit, m_SpawnHeight * 2f, m_SpawnLayerMask))
-            return;
+            if (!Physics.Raycast(downwardRay, out RaycastHit hit, m_SpawnHeight * 2f, m_SpawnLayerMask))
+                return;
 
-        Vector3 spawnPosition = hit.point + Vector3.up * m_SpawnHeight;
+            Vector3 spawnPosition = hit.point + Vector3.up * m_SpawnHeight;
 
-        GameObject spawned = Instantiate(m_StonePrefab, spawnPosition, Random.rotation, m_StoneHolder);
-        m_Stones.Add(spawned.GetComponent<DrainageStone>());
+            GameObject spawned = Instantiate(m_StonePrefab, spawnPosition, Random.rotation, m_StoneHolder);
+            m_Stones.Add(spawned.GetComponent<DrainageStone>());
+        }
     }
 
     void TrySmooth()

@@ -22,6 +22,11 @@ public class JarManager : MonoBehaviour
         DrainageLayer.enabled = enable;
     }
 
+    public void DrainageLayerFull()
+    {
+        UIController.DrainageLayerFull();
+    }
+
     public void PlaceSubstrateBarrier()
     {
         SubstrateBarrier.PlaceBarrier();
@@ -37,6 +42,19 @@ public class JarManager : MonoBehaviour
     {
         SubstrateLayer.BarrierTransform = BarrierTransform;
         SubstrateLayer.CreateSubstrate();
+    }
+
+    public void EnableSubstrateSmoothBrush(bool enable)
+    {
+        if (enable)
+        {
+            SubstrateLayer.EnableSmoothBrush();
+
+        }
+        else
+        {
+            SubstrateLayer.DisableSmoothBrush();
+        }
     }
 
 }

@@ -12,6 +12,10 @@ public class SubstrateTerrain : MonoBehaviour
     [SerializeField] float m_Radius = 1.5f;
     [SerializeField] float m_Power = 2.0f;
 
+    [Header("Smooth Brush")]
+    [SerializeField] float m_SmoothRadius = 3f;
+    [SerializeField] float m_SmoothStrength = 0.3f;
+
     [Header("Terrain Limits")]
     [ReadOnly][SerializeField] float m_MaxHeight = 5f;
     [SerializeField] float m_MaxHeightOffset = 0f;
@@ -33,16 +37,21 @@ public class SubstrateTerrain : MonoBehaviour
 
     InputAction m_RaiseAction;
     InputAction m_LowerAction;
+    InputAction m_ClickAction;
     InputAction m_MousePositionAction;
 
     bool m_IsRaising;
     bool m_IsLowering;
+    bool m_IsMouseHeld;
+    bool m_IsSmoothing;
+
     AsyncOperation m_LastNavMeshUpdate;
 
     void Awake()
     {
         m_RaiseAction = new InputAction(binding: "<Mouse>/leftButton", type: InputActionType.Button);
         m_LowerAction = new InputAction(binding: "<Mouse>/rightButton", type: InputActionType.Button);
+        m_ClickAction = new InputAction(binding: "<Mouse>/leftButton", type: InputActionType.Button);
 
         m_MousePositionAction = new InputAction(
             binding: "<Mouse>/position",
@@ -55,6 +64,9 @@ public class SubstrateTerrain : MonoBehaviour
 
         m_LowerAction.performed += _ => m_IsLowering = true;
         m_LowerAction.canceled += _ => { m_IsLowering = false; FinaliseOnRelease(); };
+
+        m_ClickAction.performed += _ => m_IsMouseHeld = true;
+        m_ClickAction.canceled += _ => { m_IsMouseHeld = false; FinaliseOnRelease(); };
     }
 
     void Start()
@@ -69,7 +81,6 @@ public class SubstrateTerrain : MonoBehaviour
         m_MaxHeight = transform.InverseTransformPoint(
             new Vector3(0, LidTransform.position.y + m_MaxHeightOffset, 0)).y;
 
-        // Find the top face Y — highest vertex in the freshly generated mesh
         m_TopFaceY = float.MinValue;
         foreach (Vector3 v in m_MeshFilter.mesh.vertices)
             if (v.y > m_TopFaceY) m_TopFaceY = v.y;
@@ -81,6 +92,7 @@ public class SubstrateTerrain : MonoBehaviour
     {
         m_RaiseAction.Enable();
         m_LowerAction.Enable();
+        m_ClickAction.Enable();
         m_MousePositionAction.Enable();
     }
 
@@ -88,6 +100,7 @@ public class SubstrateTerrain : MonoBehaviour
     {
         m_RaiseAction.Disable();
         m_LowerAction.Disable();
+        m_ClickAction.Disable();
         m_MousePositionAction.Disable();
     }
 
@@ -95,11 +108,32 @@ public class SubstrateTerrain : MonoBehaviour
     {
         m_RaiseAction.Dispose();
         m_LowerAction.Dispose();
+        m_ClickAction.Dispose();
         m_MousePositionAction.Dispose();
     }
 
+    public void EnableSmoothBrush() => m_IsSmoothing = true;
+    public void DisableSmoothBrush() => m_IsSmoothing = false;
+
     void Update()
     {
+        // Smoothing mode — left click to smooth
+        if (m_IsSmoothing)
+        {
+            if (!m_IsMouseHeld) return;
+
+            Vector2 mousePosSmooth = m_MousePositionAction.ReadValue<Vector2>();
+            Ray raySmooth = m_Camera.ScreenPointToRay(mousePosSmooth);
+
+            if (!Physics.Raycast(raySmooth, out RaycastHit smoothHit)) return;
+            if (smoothHit.collider.gameObject != gameObject) return;
+
+            SmoothMesh(smoothHit.point);
+            UpdateNavMesh();
+            return;
+        }
+
+        // Raise/lower mode
         if (!m_IsRaising && !m_IsLowering) return;
 
         Vector2 mousePos = m_MousePositionAction.ReadValue<Vector2>();
@@ -133,6 +167,61 @@ public class SubstrateTerrain : MonoBehaviour
 
         if (m_MeshGenerator != null)
             m_MeshGenerator.SyncSidesToTopFace();
+    }
+
+    void SmoothMesh(Vector3 centre)
+    {
+        Mesh mesh = m_MeshFilter.mesh;
+        Vector3[] verts = mesh.vertices;
+
+        float averageY = GetAverageHeightAround(verts, centre);
+
+        for (int i = 0; i < m_TopVertCount; i++)
+        {
+            Vector3 worldVert = transform.TransformPoint(verts[i]);
+
+            float dist = Vector2.Distance(
+                new Vector2(worldVert.x, worldVert.z),
+                new Vector2(centre.x, centre.z)
+            );
+
+            if (dist > m_SmoothRadius) continue;
+
+            float influence = 1f - (dist / m_SmoothRadius);
+            influence = influence * influence * (3f - 2f * influence);
+
+            verts[i].y = Mathf.Lerp(verts[i].y, averageY, m_SmoothStrength * influence);
+        }
+
+        mesh.vertices = verts;
+        mesh.RecalculateBounds();
+        mesh.RecalculateNormals();
+
+        if (m_MeshGenerator != null)
+            m_MeshGenerator.SyncSidesToTopFace();
+    }
+
+    float GetAverageHeightAround(Vector3[] verts, Vector3 centre)
+    {
+        float total = 0f;
+        int count = 0;
+
+        for (int i = 0; i < m_TopVertCount; i++)
+        {
+            Vector3 worldVert = transform.TransformPoint(verts[i]);
+
+            float dist = Vector2.Distance(
+                new Vector2(worldVert.x, worldVert.z),
+                new Vector2(centre.x, centre.z)
+            );
+
+            if (dist > m_SmoothRadius) continue;
+
+            total += verts[i].y;
+            count++;
+        }
+
+        return count > 0 ? total / count : centre.y;
     }
 
     void UpdateNavMesh()
@@ -175,7 +264,6 @@ public class SubstrateTerrain : MonoBehaviour
         float dist = Mathf.Sqrt(x * x + z * z);
         float t = 1f - Mathf.Clamp01(dist / radius);
 
-        // Smoothstep for a natural brush falloff
         return t * t * (3f - 2f * t);
     }
 }

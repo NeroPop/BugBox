@@ -27,7 +27,9 @@ public class SubstrateTerrain : MonoBehaviour
     MeshCollider m_MeshCollider;
     SubstrateMeshGenerator m_MeshGenerator;
     Camera m_Camera;
+
     float m_TopFaceY;
+    int m_TopVertCount;
 
     InputAction m_RaiseAction;
     InputAction m_LowerAction;
@@ -71,6 +73,8 @@ public class SubstrateTerrain : MonoBehaviour
         m_TopFaceY = float.MinValue;
         foreach (Vector3 v in m_MeshFilter.mesh.vertices)
             if (v.y > m_TopFaceY) m_TopFaceY = v.y;
+
+        m_TopVertCount = m_MeshGenerator.m_Resolution * m_MeshGenerator.m_Resolution;
     }
 
     void OnEnable()
@@ -114,11 +118,8 @@ public class SubstrateTerrain : MonoBehaviour
         Mesh mesh = m_MeshFilter.mesh;
         Vector3[] verts = mesh.vertices;
 
-        for (int i = 0; i < verts.Length; i++)
+        for (int i = 0; i < m_TopVertCount; i++)
         {
-            // Only modify top face vertices, leave sides and bottom alone
-            if (verts[i].y < m_TopFaceY - 0.001f) continue;
-
             Vector3 worldVert = transform.TransformPoint(verts[i]);
             float gaussian = Gaussian(worldVert, centre, m_Radius);
             float newY = verts[i].y + displacement.y * gaussian;
@@ -130,7 +131,6 @@ public class SubstrateTerrain : MonoBehaviour
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
 
-        // Sync sides to match the newly deformed top face edges
         if (m_MeshGenerator != null)
             m_MeshGenerator.SyncSidesToTopFace();
     }
@@ -171,9 +171,11 @@ public class SubstrateTerrain : MonoBehaviour
     static float Gaussian(Vector3 pos, Vector3 mean, float radius)
     {
         float x = pos.x - mean.x;
-        float y = pos.y - mean.y;
         float z = pos.z - mean.z;
-        float n = 1.0f / (2.0f * Mathf.PI * radius * radius);
-        return n * Mathf.Pow(2.718281828f, -(x * x + y * y + z * z) / (2.0f * radius * radius));
+        float dist = Mathf.Sqrt(x * x + z * z);
+        float t = 1f - Mathf.Clamp01(dist / radius);
+
+        // Smoothstep for a natural brush falloff
+        return t * t * (3f - 2f * t);
     }
 }

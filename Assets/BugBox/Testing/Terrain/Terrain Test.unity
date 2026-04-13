@@ -4440,7 +4440,7 @@ MonoBehaviour:
   LidTransform: {fileID: 899263717}
   SubstratePrefab: {fileID: 842868068953093479, guid: da599b13eab22b243ae38a479371b5cb, type: 3}
   SubstrateParent: {fileID: 1645357701}
-  SpawnOffset: {x: 0, y: 0.1, z: 0}
+  SpawnOffset: {x: 0, y: 1.01, z: 0}
   BarrierTransform: {fileID: 0}
 --- !u!1 &1906707094
 GameObject:

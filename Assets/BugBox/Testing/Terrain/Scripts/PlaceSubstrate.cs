@@ -19,8 +19,11 @@ public class PlaceSubstrate : MonoBehaviour
         {
             GameObject substrate = Instantiate(SubstratePrefab, (BarrierTransform.position + SpawnOffset), Quaternion.identity, SubstrateParent.transform);
 
-            substrate.GetComponent<SubstrateTerrain>().BarrierTransform = BarrierTransform;
-            substrate.GetComponent<SubstrateTerrain>().LidTransform = LidTransform;
+            substrate.GetComponent<SubstrateMeshGenerator>().Generate();
+
+            SubstrateTerrain terrain = substrate.GetComponent<SubstrateTerrain>();
+            terrain.BarrierTransform = BarrierTransform;
+            terrain.LidTransform = LidTransform;
         }
         else { Debug.LogError("BarrierTransform is not set. Please place the substrate barrier first."); }
     }

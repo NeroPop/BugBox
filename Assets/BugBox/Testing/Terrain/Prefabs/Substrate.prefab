@@ -128,9 +128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SubstrateMeshGenerator
   m_Resolution: 30
-  m_Width: 10
-  m_Depth: 10
-  m_Thickness: 2
+  m_Width: 19.5
+  m_Depth: 19.5
+  m_Thickness: 1
 --- !u!114 &-5686247618855114656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60e3127c1229088428c8b9db3af985d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SubstrateTerrain
-  m_Radius: 1
-  m_Power: 0.5
+  m_Radius: 2
+  m_Power: 1
   m_MaxHeight: 5
   m_MaxHeightOffset: -7
   m_MinHeight: 0

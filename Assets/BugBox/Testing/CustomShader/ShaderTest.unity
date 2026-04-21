@@ -1947,7 +1947,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 6b4eecc394e888d4bbb056a7a231a6af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2289,7 +2289,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 6b4eecc394e888d4bbb056a7a231a6af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2380,7 +2380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e30b8537a8307147863b27c8c7bf056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropItem
-  prefab: {fileID: 6631744311169712849, guid: 0487afb965de7004085ce2a43e0aea29, type: 3}
+  prefab: {fileID: 6631744311169712849, guid: b2a408805e266de45929e79c623a7f13, type: 3}
   spawnedPrefabsHolder: {fileID: 1645357702}
   spawnCamera: {fileID: 1719995941}
   spawnLayerMask:

@@ -17,6 +17,10 @@ Shader "Custom/GhibliToon"
 
         [Header(Painterly)]
         _TextureInfluence("Texture Influence",  Range(0, 1))   = 0.9
+
+        [Header(Outline)]
+        _OutlineColor   ("Outline Color",   Color)        = (0.1, 0.08, 0.08, 1)
+        _OutlineWidth   ("Outline Width",   Range(0, 5))  = 1.0
     }
 
     SubShader
@@ -28,6 +32,7 @@ Shader "Custom/GhibliToon"
             "LightMode"       = "UniversalForward"
         }
 
+        // Pass 1 - Main toon lit pass
         Pass
         {
             HLSLPROGRAM
@@ -134,7 +139,68 @@ Shader "Custom/GhibliToon"
             ENDHLSL
         }
 
-        // Shadow casting pass so objects cast correct shadows
+        // Pass 2 - Outline pass 
+        Pass
+        {
+            Name "Outline"
+            Cull Front  // Render back faces only
+
+            HLSLPROGRAM
+            #pragma vertex   vertOutline
+            #pragma fragment fragOutline
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            CBUFFER_START(UnityPerMaterial)
+                float4 _MainTex_ST;
+                float4 _BaseColor;
+                float4 _ShadowColor;
+                float  _ShadowStep;
+                float  _ShadowFeather;
+                float4 _RimColor;
+                float  _RimPower;
+                float  _RimStrength;
+                float  _TextureInfluence;
+                float4 _OutlineColor;
+                float  _OutlineWidth;
+            CBUFFER_END
+
+            struct Attributes
+            {
+                float4 positionOS : POSITION;
+                float3 normalOS   : NORMAL;
+            };
+
+            struct Varyings
+            {
+                float4 positionHCS : SV_POSITION;
+            };
+
+            Varyings vertOutline(Attributes IN)
+            {
+                Varyings OUT;
+
+                // Push vertices out along their normals in clip space
+                // This keeps outline width consistent regardless of distance
+                float4 clipPos    = TransformObjectToHClip(IN.positionOS.xyz);
+                float3 normalCS   = TransformObjectToHClip(IN.normalOS).xyz;
+                float2 offset     = normalize(normalCS.xy);
+
+                // Scale outline by clip space W to keep it screen-space consistent
+                clipPos.xy       += offset * _OutlineWidth * 0.01 * clipPos.w;
+
+                OUT.positionHCS   = clipPos;
+                return OUT;
+            }
+
+            half4 fragOutline(Varyings IN) : SV_Target
+            {
+                return _OutlineColor;
+            }
+            ENDHLSL
+        }
+
+        // Pass 3 - Shadow caster so objects cast correct shadows
         UsePass "Universal Render Pipeline/Lit/ShadowCaster"
     }
 }

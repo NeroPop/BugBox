@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e5ee689b3bed84f9c751aa3b939352, type: 3}
   m_Name: ScreenSpaceOutlineFeature
   m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceOutlineFeature
-  m_Active: 1
+  m_Active: 0
   settings:
     outlineMaterial: {fileID: 2100000, guid: 67dd1f8618b75724ca943e31e150ad00, type: 2}
     renderPassEvent: 300

@@ -9,7 +9,7 @@ Shader "Custom/ScreenSpaceOutlines"
         _DepthFadeStart   ("Depth Fade Start",  Range(0, 200)) = 10.0
         _DepthFadeEnd     ("Depth Fade End",    Range(0, 200)) = 40.0
     }
-
+    /*
     SubShader
     {
         Tags
@@ -62,5 +62,5 @@ Shader "Custom/ScreenSpaceOutlines"
             }
             ENDHLSL
         }
-    }
+    }*/
 }

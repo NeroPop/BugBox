@@ -648,10 +648,18 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8271332338845990865, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -4472604632016145820, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 505c97b29d89a0749bef13c8e991aec3, type: 2}
+    - target: {fileID: -4040107219404276327, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -4005807325861906750, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -672,9 +680,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: radio_fbx (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4055003865582612829, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4055003865582612829, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -2032,7 +2044,7 @@ GameObject:
   - component: {fileID: 764345290}
   - component: {fileID: 764345289}
   - component: {fileID: 764345288}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2226,7 +2238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &811834623
 Transform:
   m_ObjectHideFlags: 0
@@ -2292,7 +2304,7 @@ GameObject:
   - component: {fileID: 917767230}
   - component: {fileID: 917767229}
   - component: {fileID: 917767228}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4055,7 +4067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1709105052
 Transform:
   m_ObjectHideFlags: 0
@@ -4440,10 +4452,18 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8271332338845990865, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -4472604632016145820, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 505c97b29d89a0749bef13c8e991aec3, type: 2}
+    - target: {fileID: -4040107219404276327, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -4005807325861906750, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -4463,6 +4483,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
       propertyPath: m_Name
       value: radio_fbx
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4055003865582612829, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
       propertyPath: m_Materials.Array.size
@@ -4809,7 +4833,7 @@ GameObject:
   - component: {fileID: 1858406764}
   - component: {fileID: 1858406763}
   - component: {fileID: 1858406762}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4865,7 +4889,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  - {fileID: 2100000, guid: 3e68ec8e2b8810640b6731414b8e9a85, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4974,13 +4997,13 @@ GameObject:
   - component: {fileID: 1907452759}
   - component: {fileID: 1907452758}
   - component: {fileID: 1907452757}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &1907452757
 CapsuleCollider:
   m_ObjectHideFlags: 0

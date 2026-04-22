@@ -30,11 +30,11 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
     {
         Settings m_Settings;
 
-        // RenderGraph pass data
         class PassData
         {
             public Material material;
             public TextureHandle source;
+            public TextureHandle destination;
         }
 
         public ScreenSpaceOutlinePass(Settings settings)
@@ -50,27 +50,27 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
             if (m_Settings.outlineMaterial == null) return;
 
             UniversalResourceData resourceData = frameData.Get<UniversalResourceData>();
-
             if (resourceData.isActiveTargetBackBuffer) return;
 
-            TextureHandle source = resourceData.activeColorTexture;
-
-            // Get camera texture descriptor for temp texture
             UniversalCameraData cameraData = frameData.Get<UniversalCameraData>();
             RenderTextureDescriptor desc = cameraData.cameraTargetDescriptor;
             desc.depthBufferBits = 0;
 
+            TextureHandle source = resourceData.activeColorTexture;
             TextureHandle destination = UniversalRenderer.CreateRenderGraphTexture(
                 renderGraph, desc, "_TempOutlineTexture", false);
 
+            // Pass 1 - render outlines into temp texture
             using (var builder = renderGraph.AddRasterRenderPass<PassData>(
-                "ScreenSpaceOutlines", out var passData))
+                "ScreenSpaceOutlines_Draw", out var passData))
             {
                 passData.material = m_Settings.outlineMaterial;
                 passData.source = source;
+                passData.destination = destination;
 
                 builder.UseTexture(source);
                 builder.SetRenderAttachment(destination, 0);
+                builder.AllowPassCulling(false);
 
                 builder.SetRenderFunc((PassData data, RasterGraphContext context) =>
                 {
@@ -79,20 +79,22 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
                 });
             }
 
-            // Copy result back to active color texture
+            // Pass 2 - copy temp texture back to camera colour
             using (var builder = renderGraph.AddRasterRenderPass<PassData>(
                 "ScreenSpaceOutlines_CopyBack", out var passData))
             {
-                passData.material = null;
                 passData.source = destination;
+                passData.destination = source;
 
                 builder.UseTexture(destination);
                 builder.SetRenderAttachment(source, 0);
+                builder.AllowPassCulling(false);
 
                 builder.SetRenderFunc((PassData data, RasterGraphContext context) =>
                 {
+                    // Use RenderingUtils blit material for the copy - avoids null material error
                     Blitter.BlitTexture(context.cmd, data.source,
-                        new Vector4(1, 1, 0, 0), null, 0);
+                        new Vector4(1, 1, 0, 0), 0, false);
                 });
             }
         }

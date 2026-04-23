@@ -14,21 +14,37 @@ Shader "Custom/GhibliToon"
         _RimColor       ("Rim Color",        Color)         = (0.8, 0.85, 1.0, 1)
         _RimPower       ("Rim Power",        Range(0.1, 8)) = 2.0
         _RimStrength    ("Rim Strength",     Range(0, 1))   = 0.3
+
+        [Header(Outline)]
+        [Toggle] _EnableOutline ("Enable Outline", Float)  = 1
+        _OutlineColor   ("Outline Color Override",  Color) = (0.1, 0.08, 0.06, 1)
+        _OutlineThicknessOverride ("Outline Thickness Override", Range(1, 10)) = 1.0
+
+        [HideInInspector] _StencilRef  ("Stencil Ref",  Int) = 1
+        [HideInInspector] _StencilComp ("Stencil Comp", Int) = 8
+        [HideInInspector] _StencilOp   ("Stencil Op",   Int) = 2
     }
 
     SubShader
     {
         Tags
         {
-            "RenderType"            = "Opaque"
-            "RenderPipeline"        = "UniversalPipeline"
-            "Queue"                 = "Geometry"
+            "RenderType"     = "Opaque"
+            "RenderPipeline" = "UniversalPipeline"
+            "Queue"          = "Geometry"
         }
 
         Pass
         {
             Name "ForwardLit"
             Tags { "LightMode" = "UniversalForward" }
+
+            Stencil
+            {
+                Ref   [_StencilRef]
+                Comp  [_StencilComp]
+                Pass  [_StencilOp]
+            }
 
             HLSLPROGRAM
             #pragma vertex   vert
@@ -52,13 +68,13 @@ Shader "Custom/GhibliToon"
 
             struct Varyings
             {
-                float4 positionHCS    : SV_POSITION;
-                float2 uv             : TEXCOORD0;
-                float3 normalWS       : TEXCOORD1;
-                float3 positionWS     : TEXCOORD2;
-                float3 viewDirWS      : TEXCOORD3;
-                float4 shadowCoord    : TEXCOORD4;
-                float  fogFactor      : TEXCOORD5;
+                float4 positionHCS : SV_POSITION;
+                float2 uv          : TEXCOORD0;
+                float3 normalWS    : TEXCOORD1;
+                float3 positionWS  : TEXCOORD2;
+                float3 viewDirWS   : TEXCOORD3;
+                float4 shadowCoord : TEXCOORD4;
+                float  fogFactor   : TEXCOORD5;
             };
 
             TEXTURE2D(_MainTex);
@@ -73,6 +89,9 @@ Shader "Custom/GhibliToon"
                 float4 _RimColor;
                 float  _RimPower;
                 float  _RimStrength;
+                float4 _OutlineColor;
+                float  _OutlineThicknessOverride;
+                float  _EnableOutline;
             CBUFFER_END
 
             Varyings vert(Attributes IN)
@@ -98,46 +117,37 @@ Shader "Custom/GhibliToon"
                 float3 normal  = normalize(IN.normalWS);
                 float3 viewDir = normalize(IN.viewDirWS);
 
-                // Texture and base colour
                 half4 texColor  = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv);
                 half4 baseColor = texColor * _BaseColor;
 
-                // Main light and shadows
-                Light mainLight = GetMainLight(IN.shadowCoord);
-                float3 lightDir = normalize(mainLight.direction);
+                Light  mainLight = GetMainLight(IN.shadowCoord);
+                float3 lightDir  = normalize(mainLight.direction);
 
                 float NdotL    = dot(normal, lightDir);
                 float shadow   = mainLight.shadowAttenuation;
-                float lightVal = NdotL * shadow * 0.5 + 0.5; // remap to 0-1
+                float lightVal = NdotL * shadow * 0.5 + 0.5;
 
-                // Toon step
                 float toon = smoothstep(
                     _ShadowStep - _ShadowFeather,
                     _ShadowStep + _ShadowFeather,
                     lightVal
                 );
 
-                // Lit and shadow colours
                 half3 litColor    = baseColor.rgb * mainLight.color.rgb;
                 half3 shadowColor = _ShadowColor.rgb * baseColor.rgb;
                 half3 diffuse     = lerp(shadowColor, litColor, toon);
 
-                // Rim
                 float rim       = 1.0 - saturate(dot(viewDir, normal));
                 float rimFactor = pow(rim, _RimPower) * _RimStrength * toon;
                 half3 rimColor  = _RimColor.rgb * rimFactor;
 
-                half3 finalColor = diffuse + rimColor;
-
-                // Fog
-                finalColor = MixFog(finalColor, IN.fogFactor);
+                half3 finalColor = MixFog(diffuse + rimColor, IN.fogFactor);
 
                 return half4(finalColor, baseColor.a);
             }
             ENDHLSL
         }
 
-        // Depth normals pass - required for screen space outlines
         Pass
         {
             Name "DepthNormals"
@@ -173,6 +183,9 @@ Shader "Custom/GhibliToon"
                 float4 _RimColor;
                 float  _RimPower;
                 float  _RimStrength;
+                float4 _OutlineColor;
+                float  _OutlineThicknessOverride;
+                float  _EnableOutline;
             CBUFFER_END
 
             VaryingsDN vertDepthNormals(AttributesDN IN)

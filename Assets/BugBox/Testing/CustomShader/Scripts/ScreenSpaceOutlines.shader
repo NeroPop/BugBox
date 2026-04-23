@@ -64,11 +64,15 @@ Shader "Custom/ScreenSpaceOutlines"
                     _OutlineThickness / _ScreenParams.y
                 );
 
-                // Sample scene colour
                 half3 sceneColor = SAMPLE_TEXTURE2D_X_LOD(
                     _BlitTexture, sampler_LinearClamp, uv, 0).rgb;
 
-                // Depth edges
+                float3 normalC = SampleSceneNormals(uv);
+
+                // No normals means no outline for this pixel
+                if (dot(normalC, normalC) < 0.01)
+                    return half4(sceneColor, 1);
+
                 float depthC = SampleLinearDepth(uv);
                 float depthN = SampleLinearDepth(uv + float2( 0,  1) * texelSize);
                 float depthS = SampleLinearDepth(uv + float2( 0, -1) * texelSize);
@@ -80,8 +84,6 @@ Shader "Custom/ScreenSpaceOutlines"
                                 + abs(depthC - depthE)
                                 + abs(depthC - depthW);
 
-                // Normal edges
-                float3 normalC = SampleSceneNormals(uv);
                 float3 normalN = SampleSceneNormals(uv + float2( 0,  1) * texelSize);
                 float3 normalS = SampleSceneNormals(uv + float2( 0, -1) * texelSize);
                 float3 normalE = SampleSceneNormals(uv + float2( 1,  0) * texelSize);

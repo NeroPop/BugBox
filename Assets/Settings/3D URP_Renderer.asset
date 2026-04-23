@@ -15,6 +15,9 @@ MonoBehaviour:
   m_Active: 1
   settings:
     outlineMaterial: {fileID: 2100000, guid: 67dd1f8618b75724ca943e31e150ad00, type: 2}
+    outlineLayers:
+      serializedVersion: 2
+      m_Bits: 8
     renderPassEvent: 300
 --- !u!114 &11400000
 MonoBehaviour:
@@ -49,7 +52,7 @@ MonoBehaviour:
   m_AssetVersion: 3
   m_PrepassLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8
   m_OpaqueLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295

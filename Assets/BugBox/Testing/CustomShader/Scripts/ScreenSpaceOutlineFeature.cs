@@ -9,6 +9,7 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
     public class Settings
     {
         public Material outlineMaterial;
+        public LayerMask outlineLayers = 0;
         public RenderPassEvent renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
     }
 
@@ -23,6 +24,11 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
         if (settings.outlineMaterial == null) return;
+
+        // Skip if the camera's culling mask doesn't include any outline layers
+        Camera cam = renderingData.cameraData.camera;
+        if ((cam.cullingMask & settings.outlineLayers) == 0) return;
+
         renderer.EnqueuePass(m_Pass);
     }
 
@@ -37,6 +43,7 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
             public TextureHandle depth;
             public TextureHandle normals;
             public TextureHandle destination;
+            public int layerMask;
         }
 
         public ScreenSpaceOutlinePass(Settings settings)
@@ -66,7 +73,6 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
             TextureHandle destination = UniversalRenderer.CreateRenderGraphTexture(
                 renderGraph, desc, "_OutlineTemp", false, FilterMode.Bilinear);
 
-            // Pass 1 — outline shader into temp
             using (var builder = renderGraph.AddRasterRenderPass<PassData>(
                 "ScreenSpaceOutlines_Draw", out var passData))
             {
@@ -75,6 +81,7 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
                 passData.depth = resourceData.activeDepthTexture;
                 passData.normals = resourceData.cameraNormalsTexture;
                 passData.destination = destination;
+                passData.layerMask = m_Settings.outlineLayers;
 
                 builder.UseTexture(source, AccessFlags.Read);
                 builder.UseTexture(passData.depth, AccessFlags.Read);
@@ -87,13 +94,13 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
                 {
                     context.cmd.SetGlobalTexture("_CameraDepthTexture", data.depth);
                     context.cmd.SetGlobalTexture("_CameraNormalsTexture", data.normals);
+                    context.cmd.SetGlobalInt("_OutlineLayerMask", data.layerMask);
 
                     Blitter.BlitTexture(context.cmd, data.source,
                         new Vector4(1, 1, 0, 0), data.material, 0);
                 });
             }
 
-            // Pass 2 — copy temp back to camera target
             using (var builder = renderGraph.AddRasterRenderPass<PassData>(
                 "ScreenSpaceOutlines_CopyBack", out var passData))
             {

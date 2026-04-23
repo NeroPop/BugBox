@@ -14,24 +14,123 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
     }
 
     public Settings settings = new Settings();
-    ScreenSpaceOutlinePass m_Pass;
+
+    ScreenSpaceOutlineNormalsPass m_NormalsPass;
+    ScreenSpaceOutlinePass m_OutlinePass;
 
     public override void Create()
     {
-        m_Pass = new ScreenSpaceOutlinePass(settings);
+        m_NormalsPass = new ScreenSpaceOutlineNormalsPass(settings);
+        m_OutlinePass = new ScreenSpaceOutlinePass(settings);
     }
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
         if (settings.outlineMaterial == null) return;
-
-        // Skip if the camera's culling mask doesn't include any outline layers
-        Camera cam = renderingData.cameraData.camera;
-        if ((cam.cullingMask & settings.outlineLayers) == 0) return;
-
-        renderer.EnqueuePass(m_Pass);
+        renderer.EnqueuePass(m_NormalsPass);
+        renderer.EnqueuePass(m_OutlinePass);
     }
 
+    // ---------------------------------------------------------------
+    // Pass 1: Renders outlined objects normals into a dedicated texture
+    // ---------------------------------------------------------------
+    class ScreenSpaceOutlineNormalsPass : ScriptableRenderPass
+    {
+        Settings m_Settings;
+
+        static readonly int s_OutlineNormalsId =
+            Shader.PropertyToID("_OutlineNormalsTexture");
+
+        // Shared handle so the outline pass can access the normals texture
+        public static TextureHandle s_NormalsTexture;
+
+        class NormalsPassData
+        {
+            public RendererListHandle rendererList;
+        }
+
+        class BindPassData
+        {
+            public TextureHandle normalsTexture;
+        }
+
+        public ScreenSpaceOutlineNormalsPass(Settings settings)
+        {
+            m_Settings = settings;
+            renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
+        }
+
+        public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
+        {
+            UniversalRenderingData renderingData = frameData.Get<UniversalRenderingData>();
+            UniversalCameraData cameraData = frameData.Get<UniversalCameraData>();
+            UniversalLightData lightData = frameData.Get<UniversalLightData>();
+            UniversalResourceData resourceData = frameData.Get<UniversalResourceData>();
+
+            RenderTextureDescriptor desc = cameraData.cameraTargetDescriptor;
+            desc.depthBufferBits = 0;
+            desc.msaaSamples = 1;
+            desc.colorFormat = RenderTextureFormat.ARGB32;
+
+            s_NormalsTexture = UniversalRenderer.CreateRenderGraphTexture(
+                renderGraph, desc, "_OutlineNormalsTexture", true, FilterMode.Bilinear);
+
+            var drawSettings = RenderingUtils.CreateDrawingSettings(
+                new ShaderTagId("DepthNormals"),
+                renderingData, cameraData, lightData,
+                SortingCriteria.CommonOpaque);
+
+            var filterSettings = new FilteringSettings(
+                RenderQueueRange.opaque, m_Settings.outlineLayers);
+
+            RendererListParams listParams = new RendererListParams(
+                renderingData.cullResults, drawSettings, filterSettings);
+
+            TextureHandle depthHandle = resourceData.activeDepthTexture;
+
+            // Sub-pass A: render normals
+            using (var builder = renderGraph.AddRasterRenderPass<NormalsPassData>(
+                "ScreenSpaceOutlines_Normals", out var passData))
+            {
+                passData.rendererList = renderGraph.CreateRendererList(listParams);
+
+                builder.SetRenderAttachment(s_NormalsTexture, 0, AccessFlags.Write);
+                builder.SetRenderAttachmentDepth(depthHandle, AccessFlags.ReadWrite);
+                builder.UseRendererList(passData.rendererList);
+                builder.AllowPassCulling(false);
+
+                builder.SetRenderFunc((NormalsPassData data, RasterGraphContext context) =>
+                {
+                    context.cmd.ClearRenderTarget(false, true, Color.black);
+                    context.cmd.DrawRendererList(data.rendererList);
+                });
+            }
+
+            // Sub-pass B: bind normals texture as global AFTER it has been written
+            using (var builder = renderGraph.AddRasterRenderPass<BindPassData>(
+                "ScreenSpaceOutlines_BindNormals", out var passData))
+            {
+                passData.normalsTexture = s_NormalsTexture;
+
+                // Declare as read so RenderGraph knows this pass depends on the normals pass
+                builder.UseTexture(s_NormalsTexture, AccessFlags.Read);
+                builder.AllowPassCulling(false);
+                builder.AllowGlobalStateModification(true);
+
+                // Need a dummy render attachment to make this a valid raster pass
+                builder.SetRenderAttachment(resourceData.activeColorTexture, 0, AccessFlags.Read);
+
+                builder.SetRenderFunc((BindPassData data, RasterGraphContext context) =>
+                {
+                    context.cmd.SetGlobalTexture(s_OutlineNormalsId, data.normalsTexture);
+                });
+            }
+        }
+    }
+
+    // ---------------------------------------------------------------
+    // Pass 2: Edge detection and outline compositing
+    // ---------------------------------------------------------------
     class ScreenSpaceOutlinePass : ScriptableRenderPass
     {
         Settings m_Settings;
@@ -40,18 +139,15 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
         {
             public Material material;
             public TextureHandle source;
-            public TextureHandle depth;
-            public TextureHandle normals;
             public TextureHandle destination;
-            public int layerMask;
+            public TextureHandle depth;
         }
 
         public ScreenSpaceOutlinePass(Settings settings)
         {
             m_Settings = settings;
-            renderPassEvent = settings.renderPassEvent;
-            ConfigureInput(ScriptableRenderPassInput.Normal |
-                           ScriptableRenderPassInput.Depth |
+            renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
+            ConfigureInput(ScriptableRenderPassInput.Depth |
                            ScriptableRenderPassInput.Color);
         }
 
@@ -63,13 +159,13 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
             UniversalCameraData cameraData = frameData.Get<UniversalCameraData>();
 
             if (resourceData.isActiveTargetBackBuffer) return;
-            if (!resourceData.cameraNormalsTexture.IsValid()) return;
 
             RenderTextureDescriptor desc = cameraData.cameraTargetDescriptor;
             desc.depthBufferBits = 0;
             desc.msaaSamples = 1;
 
             TextureHandle source = resourceData.activeColorTexture;
+            TextureHandle depth = resourceData.activeDepthTexture;
             TextureHandle destination = UniversalRenderer.CreateRenderGraphTexture(
                 renderGraph, desc, "_OutlineTemp", false, FilterMode.Bilinear);
 
@@ -78,14 +174,17 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
             {
                 passData.material = m_Settings.outlineMaterial;
                 passData.source = source;
-                passData.depth = resourceData.activeDepthTexture;
-                passData.normals = resourceData.cameraNormalsTexture;
                 passData.destination = destination;
-                passData.layerMask = m_Settings.outlineLayers;
+                passData.depth = depth;
 
                 builder.UseTexture(source, AccessFlags.Read);
-                builder.UseTexture(passData.depth, AccessFlags.Read);
-                builder.UseTexture(passData.normals, AccessFlags.Read);
+                builder.UseTexture(depth, AccessFlags.Read);
+
+                // Declare the normals texture as read so execution order is correct
+                if (ScreenSpaceOutlineNormalsPass.s_NormalsTexture.IsValid())
+                    builder.UseTexture(
+                        ScreenSpaceOutlineNormalsPass.s_NormalsTexture, AccessFlags.Read);
+
                 builder.SetRenderAttachment(destination, 0, AccessFlags.Write);
                 builder.AllowPassCulling(false);
                 builder.AllowGlobalStateModification(true);
@@ -93,8 +192,6 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
                 builder.SetRenderFunc((PassData data, RasterGraphContext context) =>
                 {
                     context.cmd.SetGlobalTexture("_CameraDepthTexture", data.depth);
-                    context.cmd.SetGlobalTexture("_CameraNormalsTexture", data.normals);
-                    context.cmd.SetGlobalInt("_OutlineLayerMask", data.layerMask);
 
                     Blitter.BlitTexture(context.cmd, data.source,
                         new Vector4(1, 1, 0, 0), data.material, 0);

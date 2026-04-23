@@ -34,8 +34,8 @@ Material:
     - _OutlineThicknessOverride: 1
     - _RimPower: 2
     - _RimStrength: 0.3
-    - _ShadowFeather: 0.04
-    - _ShadowStep: 0.4
+    - _ShadowFeather: 0.0468
+    - _ShadowStep: 0.751
     - _StencilComp: 8
     - _StencilOp: 2
     - _StencilRef: 0

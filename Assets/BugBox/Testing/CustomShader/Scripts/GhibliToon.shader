@@ -20,7 +20,7 @@ Shader "Custom/GhibliToon"
         _OutlineColor   ("Outline Color Override",  Color) = (0.1, 0.08, 0.06, 1)
         _OutlineThicknessOverride ("Outline Thickness Override", Range(1, 10)) = 1.0
 
-        [HideInInspector] _StencilRef  ("Stencil Ref",  Int) = 1
+        [HideInInspector] _StencilRef  ("Stencil Ref",  Int) = 0
         [HideInInspector] _StencilComp ("Stencil Comp", Int) = 8
         [HideInInspector] _StencilOp   ("Stencil Op",   Int) = 2
     }

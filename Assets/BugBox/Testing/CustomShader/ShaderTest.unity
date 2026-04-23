@@ -1894,6 +1894,7 @@ GameObject:
   - component: {fileID: 764345290}
   - component: {fileID: 764345289}
   - component: {fileID: 764345288}
+  - component: {fileID: 764345292}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -1947,7 +1948,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6b4eecc394e888d4bbb056a7a231a6af, type: 2}
+  - {fileID: 1523326511}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1994,6 +1995,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &764345292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764345287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecf1a72031aa42409b6a2a3fe35af3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineObject
+  m_HasOutline: 0
 --- !u!1 &790022178
 GameObject:
   m_ObjectHideFlags: 0
@@ -3279,6 +3293,52 @@ MonoBehaviour:
   SubstrateLayer: {fileID: 1857153227}
   UIController: {fileID: 1357499379}
   BarrierTransform: {fileID: 0}
+--- !u!21 &1523326511
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GhibliToonMaterial (Instance)
+  m_Shader: {fileID: 4800000, guid: a5dbda7753eaa634b960bf09d66afb0a, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _EnableOutline: 0
+    - _OutlineThicknessOverride: 1
+    - _RimPower: 2
+    - _RimStrength: 0.3
+    - _ShadowFeather: 0.04
+    - _ShadowStep: 0.4
+    - _StencilComp: 8
+    - _StencilOp: 2
+    - _StencilRef: 0
+    m_Colors:
+    - _BaseColor: {r: 0.25792095, g: 0.7924528, b: 0.7239472, a: 1}
+    - _OutlineColor: {r: 0.1, g: 0.08, b: 0.06, a: 1}
+    - _RimColor: {r: 0.8, g: 0.85, b: 1, a: 1}
+    - _ShadowColor: {r: 0.39999998, g: 0.45, b: 0.65, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &1544663783
 GameObject:
   m_ObjectHideFlags: 0

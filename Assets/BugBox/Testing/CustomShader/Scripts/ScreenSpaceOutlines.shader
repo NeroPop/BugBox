@@ -25,6 +25,12 @@ Shader "Custom/ScreenSpaceOutlines"
             ZTest Always
             Cull Off
 
+            Stencil
+            {
+                Ref  1
+                Comp Equal
+            }
+
             HLSLPROGRAM
             #pragma vertex Vert
             #pragma fragment frag

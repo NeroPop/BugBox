@@ -29,7 +29,7 @@ Material:
     - _DepthFadeStart: 0
     - _DepthThreshold: 1
     - _NormalThreshold: 0.7
-    - _OutlineThickness: 1
+    - _OutlineThickness: 1.5
     m_Colors:
     - _OutlineColor: {r: 0.1, g: 0.079999946, b: 0.06, a: 1}
   m_BuildTextureStacks: []

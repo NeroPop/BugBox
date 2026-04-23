@@ -2145,6 +2145,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: radio_fbx
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4055003865582612829, guid: 950e15da2ff29f2459288498e37a9128, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -2289,7 +2293,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6b4eecc394e888d4bbb056a7a231a6af, type: 2}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4824,7 +4828,7 @@ GameObject:
   - component: {fileID: 1907452759}
   - component: {fileID: 1907452758}
   - component: {fileID: 1907452757}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

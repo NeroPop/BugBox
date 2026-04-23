@@ -75,8 +75,14 @@ public class ScreenSpaceOutlineFeature : ScriptableRendererFeature
             s_NormalsTexture = UniversalRenderer.CreateRenderGraphTexture(
                 renderGraph, desc, "_OutlineNormalsTexture", true, FilterMode.Bilinear);
 
+            var shaderTagIds = new System.Collections.Generic.List<ShaderTagId>
+            {
+                new ShaderTagId("DepthNormals"),    // Custom GhibliToon pass
+                new ShaderTagId("DepthNormalOnly"), // URP built-in Lit pass tag
+            };
+
             var drawSettings = RenderingUtils.CreateDrawingSettings(
-                new ShaderTagId("DepthNormals"),
+                shaderTagIds,
                 renderingData, cameraData, lightData,
                 SortingCriteria.CommonOpaque);
 

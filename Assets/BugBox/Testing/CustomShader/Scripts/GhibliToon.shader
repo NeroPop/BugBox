@@ -20,6 +20,7 @@ Shader "Custom/GhibliToon"
 
         // ---------------------------------------------------------------
         // Rim Lighting
+        // Adds a soft halo around edges facing away from the light
         // ---------------------------------------------------------------
         [Header(Rim Light)]
         _RimColor    ("Rim Color",    Color)         = (0.8, 0.85, 1.0, 1)
@@ -49,12 +50,12 @@ Shader "Custom/GhibliToon"
             #pragma vertex   vert
             #pragma fragment frag
 
-            // Shadow variants
+            // Shadow variants — determines which shadow mode is compiled
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE
             #pragma multi_compile _ _SHADOWS_SOFT
-            // Additional light variants
+            // Additional lights — point lights, spot lights etc
             #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-            // Fog
+            // Fog — scene fog blending
             #pragma multi_compile_fog
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
@@ -62,7 +63,7 @@ Shader "Custom/GhibliToon"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
 
             // -------------------------------------------------------
-            // Vertex input from mesh
+            // Vertex input — data read directly from the mesh
             // -------------------------------------------------------
             struct Attributes
             {
@@ -72,7 +73,8 @@ Shader "Custom/GhibliToon"
             };
 
             // -------------------------------------------------------
-            // Data passed from vertex to fragment shader
+            // Varyings — data interpolated across the triangle
+            // and passed from vertex shader to fragment shader
             // -------------------------------------------------------
             struct Varyings
             {
@@ -88,8 +90,10 @@ Shader "Custom/GhibliToon"
             TEXTURE2D(_MainTex);
             SAMPLER(sampler_MainTex);
 
+            // Constant buffer — all material properties declared here
+            // so the GPU can batch them efficiently
             CBUFFER_START(UnityPerMaterial)
-                float4 _MainTex_ST;
+                float4 _MainTex_ST;    // Texture tiling and offset
                 float4 _BaseColor;
                 float4 _ShadowColor;
                 float  _ShadowStep;
@@ -103,15 +107,20 @@ Shader "Custom/GhibliToon"
             {
                 Varyings OUT;
 
-                // URP helper functions for correct space transforms
+                // GetVertexPositionInputs provides positions in all
+                // spaces (object, world, clip) in one call
                 VertexPositionInputs posInputs = GetVertexPositionInputs(IN.positionOS.xyz);
+                // GetVertexNormalInputs handles the inverse transpose
+                // needed for correct normal transformation
                 VertexNormalInputs   norInputs = GetVertexNormalInputs(IN.normalOS);
 
                 OUT.positionHCS = posInputs.positionCS;
                 OUT.positionWS  = posInputs.positionWS;
                 OUT.normalWS    = norInputs.normalWS;
                 OUT.viewDirWS   = GetWorldSpaceViewDir(posInputs.positionWS);
+                // TRANSFORM_TEX applies the tiling and offset set in the Inspector
                 OUT.uv          = TRANSFORM_TEX(IN.uv, _MainTex);
+                // GetShadowCoord selects the correct shadow cascade
                 OUT.shadowCoord = GetShadowCoord(posInputs);
                 OUT.fogFactor   = ComputeFogFactor(posInputs.positionCS.z);
 
@@ -120,31 +129,34 @@ Shader "Custom/GhibliToon"
 
             half4 frag(Varyings IN) : SV_Target
             {
-                // Normalise interpolated vectors (they drift during rasterisation)
+                // Normalise interpolated vectors — they can drift from
+                // unit length during rasterisation across a triangle
                 float3 normal  = normalize(IN.normalWS);
                 float3 viewDir = normalize(IN.viewDirWS);
 
                 // -----------------------------------------------
-                // Base colour from painted texture
+                // Base colour — painted texture tinted by BaseColor
                 // -----------------------------------------------
                 half4 texColor  = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv);
                 half4 baseColor = texColor * _BaseColor;
 
                 // -----------------------------------------------
-                // Main light — direction, colour and shadow
+                // Main light — fetch direction, colour and shadow
                 // -----------------------------------------------
                 Light  mainLight = GetMainLight(IN.shadowCoord);
                 float3 lightDir  = normalize(mainLight.direction);
 
-                // NdotL remapped to 0-1 and multiplied by shadow attenuation
-                // so fully shadowed areas get the same treatment as unlit faces
+                // NdotL remapped 0-1 then multiplied by shadow attenuation
+                // Remapping means back faces sit at 0 rather than going negative
+                // which avoids shadow artefacts on the dark side of objects
                 float NdotL    = dot(normal, lightDir);
                 float shadow   = mainLight.shadowAttenuation;
                 float lightVal = NdotL * shadow * 0.5 + 0.5;
 
                 // -----------------------------------------------
-                // Toon step — smoothstep gives a soft painted edge
-                // instead of a hard binary light/shadow split
+                // Toon step — smoothstep creates a soft painted edge
+                // ShadowFeather controls how wide the transition band is
+                // ShadowStep controls where the transition sits
                 // -----------------------------------------------
                 float toon = smoothstep(
                     _ShadowStep - _ShadowFeather,
@@ -152,21 +164,26 @@ Shader "Custom/GhibliToon"
                     lightVal
                 );
 
-                // Blend between shadow colour and lit colour based on toon value
+                // Lerp between shadow and lit colour using the toon value
+                // Shadow colour is independent so it can shift warm or cool
                 half3 litColor    = baseColor.rgb * mainLight.color.rgb;
                 half3 shadowColor = _ShadowColor.rgb * baseColor.rgb;
                 half3 diffuse     = lerp(shadowColor, litColor, toon);
 
                 // -----------------------------------------------
-                // Rim light — brightens edges facing away from camera
-                // Only applied on the lit side (multiplied by toon)
+                // Rim light — highlights silhouette edges
+                // 1 - NdotV gives maximum value where surface faces away
+                // from the camera, which is where the rim appears
+                // Multiplying by toon keeps it off the shadow side
                 // -----------------------------------------------
                 float rim       = 1.0 - saturate(dot(viewDir, normal));
                 float rimFactor = pow(rim, _RimPower) * _RimStrength * toon;
                 half3 rimColor  = _RimColor.rgb * rimFactor;
 
                 // -----------------------------------------------
-                // Final composite and fog
+                // Final colour — add rim to diffuse then apply fog
+                // MixFog blends toward the scene fog colour based
+                // on the fogFactor calculated in the vertex shader
                 // -----------------------------------------------
                 half3 finalColor = MixFog(diffuse + rimColor, IN.fogFactor);
 
@@ -176,9 +193,75 @@ Shader "Custom/GhibliToon"
         }
 
         // ---------------------------------------------------------------
-        // Pass 2: Shadow Caster
+        // Pass 2: Depth Normals
+        // Writes world space normals to the _CameraNormalsTexture
+        // Required for the screen space outline feature to detect edges
+        // Only runs for objects on the Outline layer due to the
+        // Prepass Layer Mask setting on the URP Renderer
+        // ---------------------------------------------------------------
+        Pass
+        {
+            Name "DepthNormals"
+            Tags { "LightMode" = "DepthNormals" }
+
+            ZWrite On
+            ZTest LEqual
+
+            HLSLPROGRAM
+            #pragma vertex   vertDepthNormals
+            #pragma fragment fragDepthNormals
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            // Minimal vertex input — only position and normal needed
+            struct AttributesDN
+            {
+                float4 positionOS : POSITION;
+                float3 normalOS   : NORMAL;
+            };
+
+            struct VaryingsDN
+            {
+                float4 positionHCS : SV_POSITION;
+                float3 normalWS    : TEXCOORD0; // World space normal to write to buffer
+            };
+
+            // Must match the main pass CBUFFER exactly or Unity
+            // will fail to batch the draw calls correctly
+            CBUFFER_START(UnityPerMaterial)
+                float4 _MainTex_ST;
+                float4 _BaseColor;
+                float4 _ShadowColor;
+                float  _ShadowStep;
+                float  _ShadowFeather;
+                float4 _RimColor;
+                float  _RimPower;
+                float  _RimStrength;
+            CBUFFER_END
+
+            VaryingsDN vertDepthNormals(AttributesDN IN)
+            {
+                VaryingsDN OUT;
+                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                // TransformObjectToWorldNormal handles the inverse transpose
+                // so non-uniform scaling doesn't distort the normals
+                OUT.normalWS    = TransformObjectToWorldNormal(IN.normalOS);
+                return OUT;
+            }
+
+            // Pack normal into 0-1 range for storage in the RGBA texture
+            // The outline shader unpacks by multiplying by 2 and subtracting 1
+            float4 fragDepthNormals(VaryingsDN IN) : SV_Target
+            {
+                return float4(normalize(IN.normalWS) * 0.5 + 0.5, 1);
+            }
+            ENDHLSL
+        }
+
+        // ---------------------------------------------------------------
+        // Pass 3: Shadow Caster
         // Allows this object to cast shadows onto other objects
-        // Reuses URP's built-in shadow caster pass
+        // Reuses URP's built-in shadow caster pass directly
         // ---------------------------------------------------------------
         UsePass "Universal Render Pipeline/Lit/ShadowCaster"
     }

@@ -721,7 +721,7 @@ Transform:
   m_GameObject: {fileID: 250918927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4452,17 +4452,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b781298c6fe6f49beb00966804c2c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraPan
-  m_Pivot: {fileID: 250918928}
-  m_MaxAngleRight: 45
-  m_MaxAngleLeft: -45
-  m_MouseEdgeThreshold: 0.1
-  m_PanSpeed: 45
-  m_PauseAngle: 0
-  m_PauseSnapDistance: 0.5
+  _pivot: {fileID: 250918928}
+  _maxAngleRight: 45
+  _maxAngleLeft: -45
+  _mouseEdgeThreshold: 0.1
+  _panSpeed: 45
+  _pauseAngle: 0
+  _pauseSnapDistance: 0.5
   InvertControls: 0
-  m_SquareOnPosition: {x: 0, y: 11, z: -21.5}
-  m_CornerPosition: {x: 0, y: 11, z: -25}
-  m_CameraRotation: {x: 15, y: 0, z: 0}
+  _squareOnPosition: {x: 0, y: 11, z: -21.5}
+  _cornerPosition: {x: 0, y: 11, z: -25}
+  _cameraRotation: {x: 15, y: 0, z: 0}
+  _trayZoomOutDistance: -5
+  _bottomEdgeThreshold: 0.15
+  _trayZoomSpeed: 5
 --- !u!1 &1728440456
 GameObject:
   m_ObjectHideFlags: 0

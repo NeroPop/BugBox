@@ -15,7 +15,7 @@ public class GettingStartedTutorialHero : MonoBehaviour
     /// the force to apply vertically to the Hero's rigidbody to make it jump up
     public float JumpForce = 8f;
 
-    [Header("Feedbacks")]
+    [Header("Players")]
     /// a MMF_Player to play when the Hero starts jumping
     public MMF_Player JumpFeedback;
     /// a MMF_Player to play when the Hero lands after a jump

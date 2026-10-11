@@ -1341,8 +1341,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GettingStartedTutorialHero
   ActionKey: 32
   JumpForce: 8
-  JumpFeedback: {fileID: 0}
-  LandingFeedback: {fileID: 0}
+  JumpFeedback: {fileID: 851337304}
+  LandingFeedback: {fileID: 1950009685}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

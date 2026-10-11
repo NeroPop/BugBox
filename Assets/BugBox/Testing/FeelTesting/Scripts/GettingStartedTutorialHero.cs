@@ -51,6 +51,7 @@ public class GettingStartedTutorialHero : MonoBehaviour
         {
             // then we just landed, we reset our state
             _jumping = false;
+            LandingFeedback?.PlayFeedbacks();
         }
 
         // we store our velocity
@@ -64,6 +65,7 @@ public class GettingStartedTutorialHero : MonoBehaviour
     {
         _rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
         _jumping = true;
+        JumpFeedback?.PlayFeedbacks();
     }
 }
 
